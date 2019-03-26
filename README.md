@@ -1,3 +1,68 @@
+# Catalog.web
+
+Web application that allows you to browse the store's offer of upholstery materials and place an order - using MERN Stack (MongoDB, Express, React, Node.js)
+
+
+## Getting Started
+
+
+
+### Prerequisites
+```
+yarn lub npm 
+Node.js
+MongoDB
+```
+Download links: 
+[yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable) ;
+[Node.js](https://nodejs.org/en/) ;
+[MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows)
+
+### Installing
+
+#### Before first run:
+
+```
+git clone git@github.com:Frugile/Catalog.web.git
+cd Catalog.web/fronend/
+yarn install
+cd ../
+cd backend/
+yarn install
+```
+#### Run:
+Terminal 1:
+```
+mongod
+``` 
+*runs mongoDB service*
+
+Terminal 2:
+```
+mongo
+use todos
+```
+*connect to or create "todos" database*
+
+Terminal 3 Catalog.web/backed/
+```
+nodemon server
+```
+*runs node server*
+
+Terminal 4 Catalog.web/fronend/:
+```
+yarn start
+```
+*runs the react app in the development mode*
+
+Open http://localhost:3000/ to view it in the browser.
+
+
+
+<br><br><br>
+## Old Read.me:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
