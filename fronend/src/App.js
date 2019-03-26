@@ -8,7 +8,7 @@ import CreateTodo from "./components/create-todo.component";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 
-import logo from "./logo.png";
+// import logo from "./logo.png";
 
 class App extends Component {
   render() {
@@ -16,13 +16,16 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/" target="_blank">
-              <img src={logo} width="120" height="40" alt="Catalog.web" />
+            <a className="navbar-brand" href="/">
+              {/* <a className="navbar-brand" href="/" target="_blank"> */}
+              <h2>Catalog.web</h2>
+              {/* <img src={logo} width="120" height="40" alt="Catalog.web" /> */}
             </a>
-            <Link to="/" className="navbar-brand">
+            {/* <Link to="/" className="navbar-brand">
               Catalog.web
-            </Link>
-            <div className="collapse navbar-collapse">
+            </Link> */}
+            {/* <div className="collapse navbar-collapse"> */}
+            <div className="navbar-expand">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/" className="nav-link">
@@ -37,8 +40,7 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-
-          <h2>Catalog.web</h2>
+          {/* <h2>Catalog.web</h2> */}
           <Route path="/" exact component={TodosList} />
           <Route path="/edit/:id" component={EditTodo} />
           <Route path="/create" component={CreateTodo} />
