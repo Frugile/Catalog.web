@@ -13,7 +13,7 @@ todoRoutes.route("/").get(function(req, res) {
     }
   });
 });
-
+ 
 todoRoutes.route("/:id").get(function(req, res) {
   let id = req.params.id;
   Todo.findById(id, function(err, todo) {
@@ -78,6 +78,5 @@ todoRoutes.route("/getMaterials").get(function(req, res) {
     }
   });
 });
-
 
 module.exports = todoRoutes;
