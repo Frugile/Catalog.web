@@ -1,4 +1,5 @@
 let Todo = require("../models/todo.model");
+let Material = require("../models/material_model")
 const express = require("express");
 const todoRoutes = express.Router();
 
@@ -54,6 +55,18 @@ todoRoutes.route("/update/:id").post(function(req, res) {
         res.status(400).send("Update not possible");
       });
   });
+});
+
+todoRoutes.route("/addMaterial").post(function(req, res) {
+  let material = new Material(req.body);
+  material
+    .save()
+    .then(material => {
+      res.status(200).json({ material: "material added successfully" });
+    })
+    .catch(err => {
+      res.status(400).send("adding new material failed");
+    });
 });
 
 module.exports = todoRoutes;
