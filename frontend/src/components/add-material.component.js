@@ -72,8 +72,7 @@ export default class AddMaterial extends Component {
             material_view: this.state.material_view
         };
 
-        axios
-            .post('http://localhost:4000/todos/addMaterial', newMaterial)
+        axios.post('http://localhost:4000/todos/addMaterial', newMaterial)
         
         this.setState({
             material_code: '',

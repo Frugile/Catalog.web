@@ -69,4 +69,15 @@ todoRoutes.route("/addMaterial").post(function(req, res) {
     });
 });
 
+todoRoutes.route("/getMaterials").get(function(req, res) {
+  Material.find(function(err, materials) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(materials);
+    }
+  });
+});
+
+
 module.exports = todoRoutes;

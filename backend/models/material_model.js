@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let Material = new Schema({
-  code: {
+  material_code: {
     type: String
   },
-  category: {
+  material_category: {
     type: String
   },
-  unitPrice: {
+  material_unitPrice: {
     type: Number
   },
-  isAvalible: {
+  material_isAvalible: {
     type: Boolean
   },
-  height: {
+  material_height: {
     type: Number
   },
-  view: {
+  material_view: {
     type: String
   }
 });
