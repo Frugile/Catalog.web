@@ -9,7 +9,7 @@ import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 import Basket from "./components/basket.component";
 import Login from "./components/login.component";
-
+import ProductsList from "./components/products-list.component";
 // import logo from "./logo.png";
 
 class App extends Component {
@@ -30,12 +30,12 @@ class App extends Component {
             <div className="navbar-expand">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/todos/" className="nav-link">
                     Todos
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/create" className="nav-link">
+                  <Link to="/todos/create" className="nav-link">
                     Create
                   </Link>
                 </li>
@@ -52,10 +52,12 @@ class App extends Component {
               </ul>
             </div>
           </nav>
+
           {/* <h2>Catalog.web</h2> */}
-          <Route path="/" exact component={TodosList} />
-          <Route path="/edit/:id" component={EditTodo} />
-          <Route path="/create" component={CreateTodo} />
+          <Route path="/" exact component={ProductsList} />
+          <Route path="/todos/" exact component={TodosList} />
+          <Route path="/todos/edit/:id" component={EditTodo} />
+          <Route path="/todos/create" component={CreateTodo} />
           <Route path="/basket" component={Basket} />
           <Route path="/login" component={Login} />
         </div>
