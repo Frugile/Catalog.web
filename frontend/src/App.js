@@ -10,6 +10,8 @@ import TodosList from "./components/todos-list.component";
 import Basket from "./components/basket.component";
 import Login from "./components/login.component";
 import ProductsList from "./components/products-list.component";
+import AddMaterial from "./components/add-material.component";
+
 // import logo from "./logo.png";
 
 class App extends Component {
@@ -49,6 +51,11 @@ class App extends Component {
                     Login
                   </Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/addMaterial" className="nav-link">
+                    Add Material
+                  </Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -60,6 +67,7 @@ class App extends Component {
           <Route path="/todos/create" component={CreateTodo} />
           <Route path="/basket" component={Basket} />
           <Route path="/login" component={Login} />
+          <Route path="/addMaterial" component={AddMaterial} />
         </div>
       </Router>
 

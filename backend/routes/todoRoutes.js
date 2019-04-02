@@ -1,4 +1,5 @@
 let Todo = require("../models/todo.model");
+let Material = require("../models/material_model")
 const express = require("express");
 const todoRoutes = express.Router();
 
@@ -55,5 +56,28 @@ todoRoutes.route("/update/:id").post(function(req, res) {
       });
   });
 });
+
+todoRoutes.route("/addMaterial").post(function(req, res) {
+  let material = new Material(req.body);
+  material
+    .save()
+    .then(material => {
+      res.status(200).json({ material: "material added successfully" });
+    })
+    .catch(err => {
+      res.status(400).send("adding new material failed");
+    });
+});
+
+todoRoutes.route("/getMaterials").get(function(req, res) {
+  Material.find(function(err, materials) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(materials);
+    }
+  });
+});
+
 
 module.exports = todoRoutes;
