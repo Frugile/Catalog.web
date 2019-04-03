@@ -1,5 +1,5 @@
 let Todo = require("../models/todo.model");
-let Material = require("../models/material_model")
+let Material = require("../models/material_model");
 const express = require("express");
 const todoRoutes = express.Router();
 
@@ -13,7 +13,17 @@ todoRoutes.route("/").get(function(req, res) {
     }
   });
 });
- 
+
+todoRoutes.route("/getMaterials").get(function(req, res) {
+  Material.find(function(err, materials) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(materials);
+    }
+  });
+});
+
 todoRoutes.route("/:id").get(function(req, res) {
   let id = req.params.id;
   Todo.findById(id, function(err, todo) {
@@ -67,16 +77,6 @@ todoRoutes.route("/addMaterial").post(function(req, res) {
     .catch(err => {
       res.status(400).send("adding new material failed");
     });
-});
-
-todoRoutes.route("/getMaterials").get(function(req, res) {
-  Material.find(function(err, materials) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(materials);
-    }
-  });
 });
 
 module.exports = todoRoutes;
