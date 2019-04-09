@@ -41,34 +41,83 @@ export default class ProductsList extends Component {
     });
   }
 
+  sortPrice(value) {
+    const {products} = this.state
+    let newProducts = products
+
+    if (value == 1) {
+      this.setState({
+        products: newProducts.sort((a, b) => a.material_unitPrice > b.material_unitPrice)
+      })
+    } else {
+      this.setState({
+        products: newProducts.sort((a, b) => a.material_unitPrice < b.material_unitPrice)
+      })
+    }
+  }
+
+  filterPrice(minPrice, maxPrice) {
+    axios
+    .get("http://localhost:4000/todos/getMaterials/filterPrice", {
+      params: {
+        valMin: minPrice,
+        valMax: maxPrice
+      }
+    })
+    .then(response => {
+      this.setState({ products: response.data });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+    return;
+  }
+
+  sortCategory(category) {
+    axios
+      .get("http://localhost:4000/todos/getMaterials/selectCategory", {
+        params: {
+          val: category
+        }
+      })
+      .then(response => {
+        this.setState({ products: response.data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+      return;
+  }
+
   render() {
     return (
-      // <div style={{ marginTop: 20 }}>
-      //   <h3>Products list</h3>
-      //   <h4>[sortowanie]</h4>
-
-      // </div>
       <div>
         <h3>Products list</h3>
-        <div className="btn-group-vertical">
+        <div class="btn-group-vertical">
           <button
-            type="button"
-            className="btn btn-primary"
+            type="radio"
+            name="a"
+            class="btn btn-primary"
             style={{ marginTop: 5 }}
+            onClick={()=>this.selectCategory("S1")}
           >
             Category 1
           </button>
           <button
-            type="button"
-            className="btn btn-primary"
+            type="radio"
+            name="a"
+            class="btn btn-primary"
             style={{ marginTop: 5 }}
+            onClick={()=>this.selectCategory("S2")}
           >
             Category 2
           </button>
           <button
-            type="button"
-            className="btn btn-primary"
+            type="radio"
+            name="a"
+            class="btn btn-primary"
             style={{ marginTop: 5 }}
+            onClick={()=>this.selectCategory("S3")}
           >
             Category 3
           </button>
@@ -81,29 +130,29 @@ export default class ProductsList extends Component {
                 Price
               </span>
             </div>
-            <input type="text" className="form-control" />
-            <input type="text" className="form-control" />
+            <input type="text" class="form-control" id="minimalPrice"/>
+            <input type="text" class="form-control" id="maximalPrice"/>
           </div>
           <button
             type="button"
-            className="btn btn-primary"
+            class="btn btn-primary"
             style={{ marginTop: 5 }}
+            onClick={( )=> this.filterPrice(document.getElementById("minimalPrice").value, document.getElementById("maximalPrice").value)}
           >
             Filtruj
           </button>
         </div>
 
-        <div className="form-group-vertical">
-          <div className="form-check form-check-inline">
-            <input className="form-check-input" type="radio" />
-            <label>price: ascending</label>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" name="radios" type="radio" id="radios1" onClick={() => this.sortPrice(1)} />
+            <label class="form-check-label" for="radios1">price: ascending</label>
           </div>
-          <div className="form-check form-check-inline">
-            <input className="form-check-input" type="radio" />
-            <label>price: descending</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" name="radios" type="radio" id="radios2" onClick={() => this.sortPrice(-1)} />
+            <label class="form-check-label" for="radios2">price: descending</label>
           </div>
         </div>
-
 
         <div class="card-deck w-100">{this.productsList()}</div>
       </div>
