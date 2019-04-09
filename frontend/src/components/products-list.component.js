@@ -4,13 +4,21 @@ import materialHolder from "./materialimg.jpg";
 import axios from "axios";
 
 const Product = props => (
-  <div class="col-xs-10">
-    <div class="card mw-25">
-      <img className="card-img-top" src={materialHolder} alt="Card image cap" />
+  <div class="col-6 col-cs-12 col-xl-3 h-100 mb-3">
+    <div className="card">
+      {/* <div class="card mw-20"> */}
+      <img
+        className="card-img-top mw-100"
+        src={props.product.material_view}
+        alt="Card image cap"
+      />
+      {/* <img className="card-img-top" src={materialHolder} alt="Card image cap" /> */}
       <div class="card-body">
-        <h5 class="card-title">{props.product.material_code}</h5>
-        <h6 class="card-title">Cena: {props.product.material_unitPrice} zł</h6>
-        <a href="#" class="btn btn-primary">
+        <h5 className="card-title">{props.product.material_code}</h5>
+        <h6 className="card-title">
+          Cena: {props.product.material_unitPrice} zł
+        </h6>
+        <a href="#" className="btn btn-primary">
           Dodaj do koszyka
         </a>
       </div>
@@ -178,8 +186,7 @@ export default class ProductsList extends Component {
             </label>
           </div>
         </div>
-
-        <div class="card-deck w-100">{this.productsList()}</div>
+        <div class="card-deck">{this.productsList()}</div>
       </div>
     );
   }

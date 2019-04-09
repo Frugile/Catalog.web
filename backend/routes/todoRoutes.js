@@ -105,6 +105,7 @@ todoRoutes.route("/addMaterial").post(function(req, res) {
       res.status(200).json({ material: "material added successfully" });
     })
     .catch(err => {
+      console.log(err);
       res.status(400).send("adding new material failed");
     });
 });
