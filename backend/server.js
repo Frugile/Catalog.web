@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const bodyParse = require("body-parser");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const PORT = 4000;
@@ -8,7 +8,7 @@ const PORT = 4000;
 const todoRoutes = require("./routes/todoRoutes");
 
 app.use(cors());
-app.use(bodyParse.json());
+app.use(bodyParser.json({ limit: "5mb" }));
 
 mongoose.connect("mongodb://127.0.0.1:27017/todos", { useNewUrlParser: true });
 const connection = mongoose.connection;

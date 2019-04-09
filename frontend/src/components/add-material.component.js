@@ -59,6 +59,23 @@ export default class AddMaterial extends Component {
     });
   }
 
+  onFileChange = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      this.setState({
+        material_view: reader.result
+      });
+
+      console.log(this.state);
+    });
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -70,8 +87,16 @@ export default class AddMaterial extends Component {
       material_height: this.state.material_height,
       material_view: this.state.material_view
     };
-
-    axios.post("http://localhost:4000/todos/addMaterial", newMaterial);
+    alert("Proszę czekać");
+    axios
+      .post("http://localhost:4000/todos/addMaterial", newMaterial)
+      .catch(function(error) {
+        console.log(error);
+        alert(error);
+      })
+      .then(function() {
+        alert("dodany");
+      });
 
     this.setState({
       material_code: "",
@@ -147,6 +172,19 @@ export default class AddMaterial extends Component {
               onChange={this.onChangeMaterialView}
             />
           </div>
+          <div className="form-group">
+            <label>Obraz:</label>
+            {/* <label for="exampleFormControlFile1">Obraz:</label> */}
+            <input
+              type="file"
+              accept="image/*"
+              class="form-control-file"
+              // id="exampleFormControlFile1"
+              onChange={this.onFileChange}
+            />
+            {/* <textarea id="base64" rows="5" /> */}
+          </div>
+
           <div className="form-group">
             <input
               type="submit"
