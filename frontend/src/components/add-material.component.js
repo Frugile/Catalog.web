@@ -87,7 +87,6 @@ export default class AddMaterial extends Component {
       material_height: this.state.material_height,
       material_view: this.state.material_view
     };
-    alert("Proszę czekać");
     axios
       .post("http://localhost:4000/todos/addMaterial", newMaterial)
       .catch(function(error) {
@@ -95,7 +94,7 @@ export default class AddMaterial extends Component {
         alert(error);
       })
       .then(function() {
-        alert("dodany");
+        alert("Obraz został załadowany");
       });
 
     this.setState({

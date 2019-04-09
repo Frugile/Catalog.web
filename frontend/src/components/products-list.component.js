@@ -18,7 +18,7 @@ const Product = props => (
         <h6 className="card-title">
           Cena: {props.product.material_unitPrice} zł
         </h6>
-        <a href="#" className="btn btn-primary">
+        <a href="#" className="btn btn-outline-primary btn-sm">
           Dodaj do koszyka
         </a>
       </div>
@@ -103,90 +103,105 @@ export default class ProductsList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Products list</h3>
-        <div class="btn-group-vertical">
-          <button
-            type="radio"
-            name="a"
-            class="btn btn-primary"
-            style={{ marginTop: 5 }}
-            onClick={() => this.selectCategory("S1")}
-          >
-            Category 1
-          </button>
-          <button
-            type="radio"
-            name="a"
-            class="btn btn-primary"
-            style={{ marginTop: 5 }}
-            onClick={() => this.selectCategory("S2")}
-          >
-            Category 2
-          </button>
-          <button
-            type="radio"
-            name="a"
-            class="btn btn-primary"
-            style={{ marginTop: 5 }}
-            onClick={() => this.selectCategory("S3")}
-          >
-            Category 3
-          </button>
-        </div>
-
-        <div>
-          <div className="input-group" style={{ marginTop: 10 }}>
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="">
-                Price
-              </span>
+        <div className="row">
+          <div className="col-2">
+            <div class="btn-group-vertical">
+              <button
+                type="radio"
+                name="a"
+                class="btn btn-outline-secondary"
+                style={{ marginTop: 5 }}
+                onClick={() => this.componentDidMount()}
+              >
+                Wszystkie kategorie
+              </button>
+              <button
+                type="radio"
+                name="a"
+                class="btn btn-outline-secondary"
+                style={{ marginTop: 5 }}
+                onClick={() => this.selectCategory("S1")}
+              >
+                Kategoria S1
+              </button>
+              <button
+                type="radio"
+                name="a"
+                class="btn btn-outline-secondary"
+                style={{ marginTop: 5 }}
+                onClick={() => this.selectCategory("S2")}
+              >
+                Kategoria S2
+              </button>
+              <button
+                type="radio"
+                name="a"
+                class="btn btn-outline-secondary"
+                style={{ marginTop: 5 }}
+                onClick={() => this.selectCategory("S3")}
+              >
+                Kategoria S3
+              </button>
             </div>
-            <input type="text" class="form-control" id="minimalPrice" />
-            <input type="text" class="form-control" id="maximalPrice" />
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            style={{ marginTop: 5 }}
-            onClick={() =>
-              this.filterPrice(
-                document.getElementById("minimalPrice").value,
-                document.getElementById("maximalPrice").value
-              )
-            }
-          >
-            Filtruj
-          </button>
-        </div>
 
-        <div class="form-group">
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              name="radios"
-              type="radio"
-              id="radios1"
-              onClick={() => this.sortPrice(1)}
-            />
-            <label class="form-check-label" for="radios1">
-              price: ascending
-            </label>
+            <div>
+              <div className="input-group" style={{ marginTop: 10 }}>
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="">
+                    Cena
+                  </span>
+                </div>
+                <input type="text" class="form-control" id="minimalPrice" />
+                <input type="text" class="form-control" id="maximalPrice" />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                style={{ marginTop: 10, marginBottom: 10 }}
+                onClick={() =>
+                  this.filterPrice(
+                    document.getElementById("minimalPrice").value,
+                    document.getElementById("maximalPrice").value
+                  )
+                }
+              >
+                Filtruj
+              </button>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  name="radios"
+                  type="radio"
+                  id="radios1"
+                  onClick={() => this.sortPrice(1)}
+                />
+                <label class="form-check-label" for="radios1">
+                  Cena: rosnąco
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  name="radios"
+                  type="radio"
+                  id="radios2"
+                  onClick={() => this.sortPrice(-1)}
+                />
+                <label class="form-check-label" for="radios2">
+                  Cena: malejąco
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              name="radios"
-              type="radio"
-              id="radios2"
-              onClick={() => this.sortPrice(-1)}
-            />
-            <label class="form-check-label" for="radios2">
-              price: descending
-            </label>
+          <div className="col-10">
+            <div class="card-deck">{this.productsList()}</div>
           </div>
         </div>
-        <div class="card-deck">{this.productsList()}</div>
       </div>
     );
   }

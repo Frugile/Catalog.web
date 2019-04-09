@@ -21,37 +21,30 @@ todoRoutes.route("/getMaterials").get(function(req, res) {
     } else {
       res.json(materials);
     }
-  }).sort({material_unitPrice: -1});
-});
-
-todoRoutes.route("/getMaterials/sortPrice").get(function(req, res) {
-  Material.find(function(err, materials) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(materials);
-    }
-  }).sort({material_unitPrice: req.query.val});
+  }).sort({ material_code: 1 });
 });
 
 todoRoutes.route("/getMaterials/filterPrice").get(function(req, res) {
-  Material.find({material_unitPrice: {$gte: req.query.valMin, $lt: req.query.valMax}},function(err, materials) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(materials);
-    }
-  });
+  Material.find(
+    { material_unitPrice: { $gte: req.query.valMin, $lt: req.query.valMax } },
+    function(err, materials) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(materials);
+      }
+    }.sort({ material_code: 1 })
+  );
 });
 
 todoRoutes.route("/getMaterials/selectCategory").get(function(req, res) {
-  Material.find({material_category: req.query.val}, function(err, materials) {
+  Material.find({ material_category: req.query.val }, function(err, materials) {
     if (err) {
       console.log(err);
     } else {
       res.json(materials);
     }
-  });
+  }).sort({ material_code: 1 });
 });
 
 todoRoutes.route("/:id").get(function(req, res) {
