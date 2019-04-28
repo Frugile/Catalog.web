@@ -69,6 +69,9 @@ export default class ProductsList extends Component {
   }
 
   filterPrice(minPrice, maxPrice) {
+    console.log("filtrowanie");
+    console.log(minPrice);
+    console.log(maxPrice);
     axios
       .get("http://localhost:4000/todos/getMaterials/filterPrice", {
         params: {
@@ -160,12 +163,15 @@ export default class ProductsList extends Component {
                 type="button"
                 class="btn btn-outline-info"
                 style={{ marginTop: 10, marginBottom: 10 }}
-                onClick={() =>
+                onClick={() => {
+                  console.log("guzik");
+                  console.log(document.getElementById("minimalPrice").value);
+                  console.log(document.getElementById("maximalPrice").value);
                   this.filterPrice(
                     document.getElementById("minimalPrice").value,
                     document.getElementById("maximalPrice").value
-                  )
-                }
+                  );
+                }}
               >
                 Filtruj
               </button>

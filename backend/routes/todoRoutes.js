@@ -33,8 +33,8 @@ todoRoutes.route("/getMaterials/filterPrice").get(function(req, res) {
       } else {
         res.json(materials);
       }
-    }.sort({ material_code: 1 })
-  );
+    }
+  ).sort({ material_code: 1 });
 });
 
 todoRoutes.route("/getMaterials/selectCategory").get(function(req, res) {
