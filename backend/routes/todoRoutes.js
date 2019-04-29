@@ -1,5 +1,6 @@
 let Todo = require("../models/todo.model");
 let Material = require("../models/material_model");
+var Cart = require("../models/cart.model");
 const express = require("express");
 const todoRoutes = express.Router();
 
@@ -101,6 +102,53 @@ todoRoutes.route("/addMaterial").post(function(req, res) {
       console.log(err);
       res.status(400).send("adding new material failed");
     });
+});
+
+// todoRoutes.route("/add-to-cart/:id").get(function(req, res) {
+//   var productId = req.params.id;
+//   var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
+//   console.log("add cart route");
+//   Product.findById(productId, function(err, product) {
+//     if (err) {
+//       return res.redirect("/");
+//     }
+//     cart.add(product, product.id);
+//     req.session.cart = cart;
+//     console.log(req.session.cart);
+//     res.redirect("/");
+//   });
+// });
+
+todoRoutes.route("/getMaterials/addToCart").get(function(req, res) {
+  console.log(">> route /getMaterials/addToCart");
+  console.log(req.query.id);
+  var productId = req.query.id;
+  console.log("cart z sesji: ");
+  console.log(req.session.cart);
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  // var cart = new Cart({});
+  console.log(cart);
+  req.session.cart = cart;
+  console.log("cart z sesji: ");
+  console.log(req.session.cart);
+  console.log(">> end route /getMaterials/addToCart");
+  res.status(200).json({ cartMessange: "route run successfully" });
+});
+
+todoRoutes.route("/add-to-cart").get(function(req, res) {
+  console.log("add cart route");
+  var productId = id;
+
+  // var cart Cartrt(req.session.cart ? req.session.cart : {});
+  Product.findById(productId, function(err, product) {
+    if (err) {
+      return res.redirect("/");
+    }
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect("/");
+  });
 });
 
 module.exports = todoRoutes;

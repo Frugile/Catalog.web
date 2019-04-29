@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import materialHolder from "./materialimg.jpg";
 import axios from "axios";
 
 const Product = props => (
@@ -18,9 +17,43 @@ const Product = props => (
         <h6 className="card-title">
           Cena: {props.product.material_unitPrice} zł
         </h6>
-        <a href="#" className="btn btn-outline-primary btn-sm">
+        <a
+          href="http://localhost:4000/"
+          className="btn btn-outline-primary btn-sm"
+          role="button"
+        >
           Dodaj do koszyka
         </a>
+        <button
+          type="radio"
+          name="a"
+          class="btn btn-outline-primary btn-sm"
+          style={{ marginTop: 5 }}
+          // onClick={() => this.addToCart("S1")}
+          onClick={() => {
+            console.log("klikk");
+            axios
+              // .get("http://localhost:4000/todos/add-to-cart/", {
+              //   params: {
+              //     id: props.product.material_code
+              //   }
+              // })
+              .get("http://localhost:4000/todos/getMaterials/addToCart", {
+                params: {
+                  id: 12
+                }
+              })
+              .then(response => {
+                console.log(response.data);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+            console.log("klk");
+          }}
+        >
+          Dodaj do koszyka
+        </button>
       </div>
     </div>
   </div>
@@ -30,6 +63,18 @@ export default class ProductsList extends Component {
   constructor(props) {
     super(props);
     this.state = { products: [] };
+  }
+
+  addToCart(id) {
+    console.log("id");
+    // axios
+    //   .get("http://localhost:4000/todos/add-to-cart/")
+    //   .then(response => {
+    //     console.log("ressponse");
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   }
 
   componentDidMount() {
