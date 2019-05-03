@@ -121,34 +121,46 @@ todoRoutes.route("/addMaterial").post(function(req, res) {
 
 todoRoutes.route("/getMaterials/addToCart").get(function(req, res) {
   console.log(">> route /getMaterials/addToCart");
-  console.log(req.query.id);
+  // console.log(req.query.id);
   var productId = req.query.id;
-  console.log("cart z sesji: ");
+  console.log("cart z sesji przed przypisaniem:");
+  console.log(req.sessionID);
+  console.log(req.session.id);
   console.log(req.session.cart);
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   // var cart = new Cart({});
+  console.log("cart pobrany z sesji: ");
   console.log(cart);
+  cart.addTest(req.query.id);
   req.session.cart = cart;
-  console.log("cart z sesji: ");
+  req.session.cart.addTest(req.query.id);
+  console.log("cart z sesji po przypisaniu:");
   console.log(req.session.cart);
   console.log(">> end route /getMaterials/addToCart");
-  res.status(200).json({ cartMessange: "route run successfully" });
+  req.session.save();
+
+  res
+    .status(200)
+    .json({
+      cartMessange: "route run successfully " + req.session.cart.totalQty
+    });
 });
 
-todoRoutes.route("/add-to-cart").get(function(req, res) {
-  console.log("add cart route");
-  var productId = id;
+// todoRoutes.route("/add-to-cart").get(function(req, res) {
+//   console.log("add cart route");
+//   var productId = id;
 
-  // var cart Cartrt(req.session.cart ? req.session.cart : {});
-  Product.findById(productId, function(err, product) {
-    if (err) {
-      return res.redirect("/");
-    }
-    cart.add(product, product.id);
-    req.session.cart = cart;
-    console.log(req.session.cart);
-    res.redirect("/");
-  });
-});
+//   // var cart Cartrt(req.session.cart ? req.session.cart : {});
+//   Product.findById(productId, function(err, product) {
+//     if (err) {
+//       return res.redirect("/");
+//     }
+//     cart.add(product, product.id);
+//     req.session.cart = cart;
+//     req.session.save();
+//     console.log(req.session.cart);
+//     res.redirect("/");
+//   });
+// });
 
 module.exports = todoRoutes;

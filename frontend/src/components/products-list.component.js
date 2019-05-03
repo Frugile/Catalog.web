@@ -41,7 +41,8 @@ const Product = props => (
               .get("http://localhost:4000/todos/getMaterials/addToCart", {
                 params: {
                   id: 12
-                }
+                },
+                withCredentials: true
               })
               .then(response => {
                 console.log(response.data);

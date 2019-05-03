@@ -14,6 +14,10 @@ module.exports = function Cart(oldCart) {
     this.totalPrice += storedItem.price;
   };
 
+  this.addTest = function(id) {
+    this.totalQty++;
+  };
+
   this.generateArray = function() {
     var arr = [];
     for (var id in this.items) {
