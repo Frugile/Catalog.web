@@ -57,8 +57,8 @@ export default class Basket extends Component {
       })
       .then(response => {
         cart = response.data;
-        console.log("cart:");
-        console.log(cart);
+        // console.log("cart:");
+        // console.log(cart);
         var arr = [];
         for (var id in cart.items) {
           arr.push(cart.items[id]);
