@@ -5,35 +5,21 @@ import axios from "axios";
 const Product = props => (
   <div className="col-6 col-cs-12 col-xl-3 h-100 mb-3">
     <div className="card">
-      {/* <div class="card mw-20"> */}
       <img
         className="card-img-top mw-100"
         src={props.product.material_view}
         alt="Card image cap"
       />
-      {/* <img className="card-img-top" src={materialHolder} alt="Card image cap" /> */}
       <div className="card-body">
         <h5 className="card-title">{props.product.material_code}</h5>
         <h6 className="card-title">
           Cena: {props.product.material_unitPrice} zł
         </h6>
-        {/* <a
-          href="http://localhost:4000/"
-          className="btn btn-outline-primary btn-sm"
-          role="button"
-        >
-          Dodaj do koszyka
-        </a> */}
         <button
           type="radio"
           name="a"
           className="btn btn-outline-primary btn-sm"
-          style={{ marginTop: 5 }}
-          // onClick={() => this.addToCart("S1")}
           onClick={() => {
-            console.log("klikk");
-            // console.log(props.product);
-
             axios
               .get("http://localhost:4000/todos/getMaterials/addToCart", {
                 params: {
@@ -66,18 +52,6 @@ export default class ProductsList extends Component {
     };
   }
 
-  addToCart(id) {
-    console.log("id");
-    // axios
-    //   .get("http://localhost:4000/todos/add-to-cart/")
-    //   .then(response => {
-    //     console.log("ressponse");
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
-  }
-
   componentDidMount() {
     axios
       .get("http://localhost:4000/todos/getMaterials", {
@@ -97,6 +71,7 @@ export default class ProductsList extends Component {
     axios
       .get("http://localhost:4000/todos/getMaterials/selectCategory", {
         params: {
+          details: 'material_code material_unitPrice material_view',
           category: this.state.category,
           sort: this.state.sort
         }
@@ -116,9 +91,6 @@ export default class ProductsList extends Component {
   }
 
   filterPrice(minPrice, maxPrice) {
-    console.log("filtrowanie");
-    console.log(minPrice);
-    console.log(maxPrice);
     axios
       .get("http://localhost:4000/todos/getMaterials/filterPrice", {
         params: {
@@ -213,9 +185,6 @@ export default class ProductsList extends Component {
                 className="btn btn-outline-info"
                 style={{ marginTop: 10, marginBottom: 10 }}
                 onClick={() => {
-                  console.log("guzik");
-                  console.log(document.getElementById("minimalPrice").value);
-                  console.log(document.getElementById("maximalPrice").value);
                   this.filterPrice(
                     document.getElementById("minimalPrice").value,
                     document.getElementById("maximalPrice").value

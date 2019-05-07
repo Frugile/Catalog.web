@@ -57,8 +57,6 @@ export default class Basket extends Component {
       })
       .then(response => {
         cart = response.data;
-        // console.log("cart:");
-        // console.log(cart);
         var arr = [];
         for (var id in cart.items) {
           arr.push(cart.items[id]);
@@ -77,7 +75,6 @@ export default class Basket extends Component {
   async componentDidUpdate() {
     console.log("update!");
     console.log(this.state.products);
-    // var arr = this.state.items;
     const arrToObj = arr =>
       arr.reduce((obj, item) => {
         obj[item.item] = item;
@@ -88,11 +85,6 @@ export default class Basket extends Component {
       totalPrice: this.state.totalPrice,
       totalQty: this.state.totalQty
     };
-    // const cart = new Object();
-    // cart.items = await arrToObj(this.state.products);
-    // cart.totalPrice = this.state.totalPrice;
-    // cart.totalQty = this.state.totalQty;
-    console.log(cart);
 
     await axios
       .get("http://localhost:4000/todos/getMaterials/updateCart", {

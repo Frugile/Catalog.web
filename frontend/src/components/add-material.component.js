@@ -173,15 +173,12 @@ export default class AddMaterial extends Component {
           </div>
           <div className="form-group">
             <label>Obraz:</label>
-            {/* <label for="exampleFormControlFile1">Obraz:</label> */}
             <input
               type="file"
               accept="image/*"
               className="form-control-file"
-              // id="exampleFormControlFile1"
               onChange={this.onFileChange}
             />
-            {/* <textarea id="base64" rows="5" /> */}
           </div>
 
           <div className="form-group">

@@ -1,8 +1,6 @@
 let Material = require("../models/material_model");
 
 module.exports = function Cart(oldCart) {
-  // console.log("oldCart " + oldCart);
-  // console.log(oldCart.items);
   this.items = oldCart.items || {};
   this.totalQty = oldCart.totalQty || 0;
   this.totalPrice = oldCart.totalPrice || 0;
