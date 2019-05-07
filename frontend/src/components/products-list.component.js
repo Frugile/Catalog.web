@@ -35,11 +35,6 @@ const Product = props => (
             // console.log(props.product);
 
             axios
-              // .get("http://localhost:4000/todos/add-to-cart/", {
-              //   params: {
-              //     id: props.product.material_code
-              //   }
-              // })
               .get("http://localhost:4000/todos/getMaterials/addToCart", {
                 params: {
                   id: props.product._id
@@ -52,7 +47,6 @@ const Product = props => (
               .catch(function(error) {
                 console.log(error);
               });
-            // console.log("klk");
           }}
         >
           Dodaj do koszyka
@@ -65,7 +59,11 @@ const Product = props => (
 export default class ProductsList extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [] };
+    this.state = { 
+      products: [], 
+      sort: 1,
+      category: ['S1','S2', 'S3'] 
+    };
   }
 
   addToCart(id) {
@@ -82,7 +80,27 @@ export default class ProductsList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/todos/getMaterials")
+      .get("http://localhost:4000/todos/getMaterials", {
+        params: {
+          details: 'material_code material_unitPrice material_view'
+        }
+      })
+      .then(response => {
+        this.setState({ products: response.data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  componentDidUpdate() {
+    axios
+      .get("http://localhost:4000/todos/getMaterials/selectCategory", {
+        params: {
+          category: this.state.category,
+          sort: this.state.sort
+        }
+      })
       .then(response => {
         this.setState({ products: response.data });
       })
@@ -95,25 +113,6 @@ export default class ProductsList extends Component {
     return this.state.products.map(function(currentProduct, i) {
       return <Product product={currentProduct} key={i} />;
     });
-  }
-
-  sortPrice(value) {
-    const { products } = this.state;
-    let newProducts = products;
-
-    if (value == 1) {
-      this.setState({
-        products: newProducts.sort(
-          (a, b) => a.material_unitPrice > b.material_unitPrice
-        )
-      });
-    } else {
-      this.setState({
-        products: newProducts.sort(
-          (a, b) => a.material_unitPrice < b.material_unitPrice
-        )
-      });
-    }
   }
 
   filterPrice(minPrice, maxPrice) {
@@ -137,10 +136,12 @@ export default class ProductsList extends Component {
   }
 
   selectCategory(category) {
+    console.log(this.state);
     axios
       .get("http://localhost:4000/todos/getMaterials/selectCategory", {
         params: {
-          val: category
+          category: category,
+          sort: this.state.sort
         }
       })
       .then(response => {
@@ -164,7 +165,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.componentDidMount()}
+                onClick={() => this.state.category = ['S1', 'S2', 'S3']}
               >
                 Wszystkie kategorie
               </button>
@@ -173,7 +174,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.selectCategory("S1")}
+                onClick={() => this.state.category = ['S1']}
               >
                 Kategoria S1
               </button>
@@ -182,7 +183,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.selectCategory("S2")}
+                onClick={() => this.state.category = ['S2']}
               >
                 Kategoria S2
               </button>
@@ -191,7 +192,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.selectCategory("S3")}
+                onClick={() => this.state.category = ['S3']}
               >
                 Kategoria S3
               </button>
@@ -232,7 +233,9 @@ export default class ProductsList extends Component {
                   name="radios"
                   type="radio"
                   id="radios1"
-                  onClick={() => this.sortPrice(1)}
+                  onClick={() => {
+                    this.state.sort = 1;
+                  }}
                 />
                 <label className="form-check-label" htmlFor="radios1">
                   Cena: rosnąco
@@ -244,7 +247,10 @@ export default class ProductsList extends Component {
                   name="radios"
                   type="radio"
                   id="radios2"
-                  onClick={() => this.sortPrice(-1)}
+                  onClick={() => {
+                    this.state.sort = -1;
+                  } 
+                  }
                 />
                 <label className="form-check-label" htmlFor="radios2">
                   Cena: malejąco

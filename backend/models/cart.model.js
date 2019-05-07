@@ -10,8 +10,7 @@ module.exports = function Cart(oldCart) {
     var storedItem = this.items[id];
     if (!storedItem) {
       const material = await Material.findById(
-        id,
-        "material_code material_code material_unitPrice"
+        id, "material_code material_unitPrice"
       );
       storedItem = this.items[id] = {
         item: id,

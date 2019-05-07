@@ -16,7 +16,7 @@ todoRoutes.route("/").get(function(req, res) {
 });
 
 todoRoutes.route("/getMaterials").get(function(req, res) {
-  Material.find(function(err, materials) {
+  Material.find({}, req.query.details,function(err, materials) {
     if (err) {
       console.log(err);
     } else {
@@ -39,13 +39,13 @@ todoRoutes.route("/getMaterials/filterPrice").get(function(req, res) {
 });
 
 todoRoutes.route("/getMaterials/selectCategory").get(function(req, res) {
-  Material.find({ material_category: req.query.val }, function(err, materials) {
+  Material.find({ material_category: {$in: req.query.category} }, function(err, materials) {
     if (err) {
       console.log(err);
     } else {
       res.json(materials);
     }
-  }).sort({ material_code: 1 });
+  }).sort({ material_code: req.query.sort });
 });
 
 todoRoutes.route("/:id").get(function(req, res) {
