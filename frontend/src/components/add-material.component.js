@@ -177,7 +177,7 @@ export default class AddMaterial extends Component {
             <input
               type="file"
               accept="image/*"
-              class="form-control-file"
+              className="form-control-file"
               // id="exampleFormControlFile1"
               onChange={this.onFileChange}
             />

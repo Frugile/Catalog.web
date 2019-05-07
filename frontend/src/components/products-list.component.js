@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import materialHolder from "./materialimg.jpg";
 import axios from "axios";
 
 const Product = props => (
-  <div class="col-6 col-cs-12 col-xl-3 h-100 mb-3">
+  <div className="col-6 col-cs-12 col-xl-3 h-100 mb-3">
     <div className="card">
       {/* <div class="card mw-20"> */}
       <img
@@ -13,14 +12,51 @@ const Product = props => (
         alt="Card image cap"
       />
       {/* <img className="card-img-top" src={materialHolder} alt="Card image cap" /> */}
-      <div class="card-body">
+      <div className="card-body">
         <h5 className="card-title">{props.product.material_code}</h5>
         <h6 className="card-title">
           Cena: {props.product.material_unitPrice} zł
         </h6>
-        <a href="#" className="btn btn-outline-primary btn-sm">
+        {/* <a
+          href="http://localhost:4000/"
+          className="btn btn-outline-primary btn-sm"
+          role="button"
+        >
           Dodaj do koszyka
-        </a>
+        </a> */}
+        <button
+          type="radio"
+          name="a"
+          className="btn btn-outline-primary btn-sm"
+          style={{ marginTop: 5 }}
+          // onClick={() => this.addToCart("S1")}
+          onClick={() => {
+            console.log("klikk");
+            // console.log(props.product);
+
+            axios
+              // .get("http://localhost:4000/todos/add-to-cart/", {
+              //   params: {
+              //     id: props.product.material_code
+              //   }
+              // })
+              .get("http://localhost:4000/todos/getMaterials/addToCart", {
+                params: {
+                  id: props.product._id
+                },
+                withCredentials: true
+              })
+              .then(response => {
+                console.log(response.data);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+            // console.log("klk");
+          }}
+        >
+          Dodaj do koszyka
+        </button>
       </div>
     </div>
   </div>
@@ -30,6 +66,18 @@ export default class ProductsList extends Component {
   constructor(props) {
     super(props);
     this.state = { products: [] };
+  }
+
+  addToCart(id) {
+    console.log("id");
+    // axios
+    //   .get("http://localhost:4000/todos/add-to-cart/")
+    //   .then(response => {
+    //     console.log("ressponse");
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   }
 
   componentDidMount() {
@@ -110,11 +158,11 @@ export default class ProductsList extends Component {
         <h3>Products list</h3>
         <div className="row">
           <div className="col-2">
-            <div class="btn-group-vertical">
+            <div className="btn-group-vertical">
               <button
                 type="radio"
                 name="a"
-                class="btn btn-outline-secondary"
+                className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
                 onClick={() => this.componentDidMount()}
               >
@@ -123,7 +171,7 @@ export default class ProductsList extends Component {
               <button
                 type="radio"
                 name="a"
-                class="btn btn-outline-secondary"
+                className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
                 onClick={() => this.selectCategory("S1")}
               >
@@ -132,7 +180,7 @@ export default class ProductsList extends Component {
               <button
                 type="radio"
                 name="a"
-                class="btn btn-outline-secondary"
+                className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
                 onClick={() => this.selectCategory("S2")}
               >
@@ -141,7 +189,7 @@ export default class ProductsList extends Component {
               <button
                 type="radio"
                 name="a"
-                class="btn btn-outline-secondary"
+                className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
                 onClick={() => this.selectCategory("S3")}
               >
@@ -156,12 +204,12 @@ export default class ProductsList extends Component {
                     Cena
                   </span>
                 </div>
-                <input type="text" class="form-control" id="minimalPrice" />
-                <input type="text" class="form-control" id="maximalPrice" />
+                <input type="text" className="form-control" id="minimalPrice" />
+                <input type="text" className="form-control" id="maximalPrice" />
               </div>
               <button
                 type="button"
-                class="btn btn-outline-info"
+                className="btn btn-outline-info"
                 style={{ marginTop: 10, marginBottom: 10 }}
                 onClick={() => {
                   console.log("guzik");
@@ -177,35 +225,35 @@ export default class ProductsList extends Component {
               </button>
             </div>
 
-            <div class="form-group">
-              <div class="form-check form-check-inline">
+            <div className="form-group">
+              <div className="form-check form-check-inline">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   name="radios"
                   type="radio"
                   id="radios1"
                   onClick={() => this.sortPrice(1)}
                 />
-                <label class="form-check-label" for="radios1">
+                <label className="form-check-label" htmlFor="radios1">
                   Cena: rosnąco
                 </label>
               </div>
-              <div class="form-check form-check-inline">
+              <div className="form-check form-check-inline">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   name="radios"
                   type="radio"
                   id="radios2"
                   onClick={() => this.sortPrice(-1)}
                 />
-                <label class="form-check-label" for="radios2">
+                <label className="form-check-label" htmlFor="radios2">
                   Cena: malejąco
                 </label>
               </div>
             </div>
           </div>
           <div className="col-10">
-            <div class="card-deck">{this.productsList()}</div>
+            <div className="card-deck">{this.productsList()}</div>
           </div>
         </div>
       </div>

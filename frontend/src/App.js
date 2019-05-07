@@ -20,11 +20,12 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/">
-              {/* <a className="navbar-brand" href="/" target="_blank"> */}
+            <Link to="/" className="navbar-brand">
               <h2>Catalog.web</h2>
-              {/* <img src={logo} width="120" height="40" alt="Catalog.web" /> */}
-            </a>
+            </Link>
+            {/* <a className="navbar-brand" href="/">
+              <h2>Catalog.web</h2>
+            </a> */}
             {/* <Link to="/" className="navbar-brand">
               Catalog.web
             </Link> */}
