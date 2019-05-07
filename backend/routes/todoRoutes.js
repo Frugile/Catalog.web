@@ -45,7 +45,7 @@ todoRoutes.route("/getMaterials/selectCategory").get(function(req, res) {
     } else {
       res.json(materials);
     }
-  }).sort({ material_code: req.query.sort });
+  }).sort({ material_unitPrice: req.query.sort });
 });
 
 todoRoutes.route("/:id").get(function(req, res) {
