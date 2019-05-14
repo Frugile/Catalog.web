@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Basket from "./components/basket.component";
-import Login from "./components/login.component";
+import Auth from "./components/auth.component";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 import ProductsList from "./components/products-list.component";
 import AddMaterial from "./components/add-material.component";
 
@@ -24,8 +26,8 @@ class App extends Component {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/login" className="nav-link">
-                    Login
+                  <Link to="/auth" className="nav-link">
+                    Auth
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -36,8 +38,10 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-          <Route path="/" exact component={ProductsList} />
+          <Route exact path="/" component={ProductsList} />
           <Route path="/basket" component={Basket} />
+          <Route path="/auth" component={Auth} />
+          <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/addMaterial" component={AddMaterial} />
         </div>

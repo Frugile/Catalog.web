@@ -45,10 +45,10 @@ const Product = props => (
 export default class ProductsList extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      products: [], 
+    this.state = {
+      products: [],
       sort: 1,
-      category: ['S1','S2', 'S3'] 
+      category: ["S1", "S2", "S3"]
     };
   }
 
@@ -56,7 +56,7 @@ export default class ProductsList extends Component {
     axios
       .get("http://localhost:4000/todos/getMaterials", {
         params: {
-          details: 'material_code material_unitPrice material_view'
+          details: "material_code material_unitPrice material_view"
         }
       })
       .then(response => {
@@ -71,7 +71,7 @@ export default class ProductsList extends Component {
     axios
       .get("http://localhost:4000/todos/getMaterials/selectCategory", {
         params: {
-          details: 'material_code material_unitPrice material_view',
+          details: "material_code material_unitPrice material_view",
           category: this.state.category,
           sort: this.state.sort
         }
@@ -137,7 +137,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.state.category = ['S1', 'S2', 'S3']}
+                onClick={() => (this.state.category = ["S1", "S2", "S3"])}
               >
                 Wszystkie kategorie
               </button>
@@ -146,7 +146,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.state.category = ['S1']}
+                onClick={() => (this.state.category = ["S1"])}
               >
                 Kategoria S1
               </button>
@@ -155,7 +155,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.state.category = ['S2']}
+                onClick={() => (this.state.category = ["S2"])}
               >
                 Kategoria S2
               </button>
@@ -164,7 +164,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => this.state.category = ['S3']}
+                onClick={() => (this.state.category = ["S3"])}
               >
                 Kategoria S3
               </button>
@@ -218,8 +218,7 @@ export default class ProductsList extends Component {
                   id="radios2"
                   onClick={() => {
                     this.state.sort = -1;
-                  } 
-                  }
+                  }}
                 />
                 <label className="form-check-label" htmlFor="radios2">
                   Cena: malejąco
