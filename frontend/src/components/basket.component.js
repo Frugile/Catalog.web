@@ -23,7 +23,6 @@ const Product = props => (
         <button
           type="button"
           className="btn btn-outline-primary btn-sm"
-          className="btn btn-outline-primary btn-sm"
           onClick={() => {
             props.cartState.products[props.index].qty--;
             if (props.cartState.products[props.index].qty === 0) {
@@ -137,8 +136,8 @@ export default class Basket extends Component {
           </tbody>
         </table>
 
-        <Link to={"/"}>
-          <button className="btn btn-primary">Kup</button>
+        <Link to={"/summary"}>
+          <button className="btn btn-primary">Podsumowanie</button>
         </Link>
       </div>
     );

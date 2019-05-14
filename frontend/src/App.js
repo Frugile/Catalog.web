@@ -16,6 +16,9 @@ import ProductsList from "./components/products-list.component";
 import AddMaterial from "./components/add-material.component";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Summary from "./components/summary.component";
+import OrdersList from "./components/allOrders.component";
+import Order from "./components/order.component";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -65,6 +68,11 @@ class App extends Component {
                       Add Material
                     </Link>
                   </li>
+                  <li className="navbar-item">
+                    <Link to="/allOrders" className="nav-link">
+                      Wszystkie Zamówienia
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </nav>
@@ -74,6 +82,9 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/addMaterial" component={AddMaterial} />
+            <Route path="/summary" component={Summary} />
+            <Route path="/allOrders" component={OrdersList} />
+            <Route path="/order" component={Order} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
