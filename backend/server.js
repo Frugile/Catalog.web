@@ -6,7 +6,11 @@ const mongoose = require("mongoose");
 const PORT = 4000;
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const passport = require("passport");
+
 const todoRoutes = require("./routes/todoRoutes");
+const users = require("./routes/users");
+
 const cookieParser = require("cookie-parser");
 
 app.use(
@@ -15,7 +19,15 @@ app.use(
     credentials: true
   })
 );
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(bodyParser.json({ limit: "5mb" }));
+
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 mongoose.connect("mongodb://127.0.0.1:27017/todos", { useNewUrlParser: true });
 const connection = mongoose.connection;
@@ -38,6 +50,7 @@ app.use(function(req, res, next) {
   next();
 });
 app.use("/todos", todoRoutes);
+app.use("/users", users);
 
 app.listen(PORT, function() {
   console.log("Servver is running on Port: " + PORT);
