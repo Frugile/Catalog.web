@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-
 const Product = props => (
   <div className="col-6 col-cs-12 col-xl-3 h-100 mb-3">
     <div className="card">
@@ -53,11 +52,15 @@ export default class ProductsList extends Component {
   }
 
   componentDidMount() {
+    console.log("componetDidMount");
     axios
       .get("http://localhost:4000/todos/getMaterials", {
         params: {
-          details: "material_code material_unitPrice material_view"
-        }
+          details: "material_code material_unitPrice material_view",
+          category: this.state.category,
+          sort: this.state.sort
+        },
+        withCredentials: true
       })
       .then(response => {
         this.setState({ products: response.data });
@@ -66,18 +69,45 @@ export default class ProductsList extends Component {
         console.log(error);
       });
   }
+  // async shouldComponentUpdate() {
+  //   var should = true;
+  //   await axios
+  //     .get("http://localhost:4000/todos/getMaterials/selectCategory", {
+  //       params: {
+  //         details: "material_code material_unitPrice material_view",
+  //         category: this.state.category,
+  //         sort: this.state.sort
+  //       }
+  //     })
+  //     .then(response => {
+  //       if (this.state.products == response.data) {
+  //         should = false;
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });s
+  //   return should;
+  // }
 
   componentDidUpdate() {
+    console.log("componetDidUpdate");
     axios
       .get("http://localhost:4000/todos/getMaterials/selectCategory", {
         params: {
           details: "material_code material_unitPrice material_view",
           category: this.state.category,
           sort: this.state.sort
-        }
+        },
+        withCredentials: true
       })
       .then(response => {
-        this.setState({ products: response.data });
+        if (
+          JSON.stringify(this.state.products) != JSON.stringify(response.data)
+        ) {
+          this.setState({ products: response.data });
+          console.log("componetDidUpdate TRUE");
+        }
       })
       .catch(function(error) {
         console.log(error);
@@ -96,7 +126,8 @@ export default class ProductsList extends Component {
         params: {
           valMin: minPrice,
           valMax: maxPrice
-        }
+        },
+        withCredentials: true
       })
       .then(response => {
         this.setState({ products: response.data });
@@ -114,7 +145,8 @@ export default class ProductsList extends Component {
         params: {
           category: category,
           sort: this.state.sort
-        }
+        },
+        withCredentials: true
       })
       .then(response => {
         this.setState({ products: response.data });
@@ -137,7 +169,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => (this.state.category = ["S1", "S2", "S3"])}
+                onClick={() => this.setState({ category: ["S1", "S2", "S3"] })}
               >
                 Wszystkie kategorie
               </button>
@@ -146,7 +178,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => (this.state.category = ["S1"])}
+                onClick={() => this.setState({ category: ["S1"] })}
               >
                 Kategoria S1
               </button>
@@ -155,7 +187,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => (this.state.category = ["S2"])}
+                onClick={() => this.setState({ category: ["S2"] })}
               >
                 Kategoria S2
               </button>
@@ -164,7 +196,7 @@ export default class ProductsList extends Component {
                 name="a"
                 className="btn btn-outline-secondary"
                 style={{ marginTop: 5 }}
-                onClick={() => (this.state.category = ["S3"])}
+                onClick={() => this.setState({ category: ["S3"] })}
               >
                 Kategoria S3
               </button>
@@ -203,7 +235,7 @@ export default class ProductsList extends Component {
                   type="radio"
                   id="radios1"
                   onClick={() => {
-                    this.state.sort = 1;
+                    this.setState({ sort: 1 });
                   }}
                 />
                 <label className="form-check-label" htmlFor="radios1">
@@ -217,7 +249,7 @@ export default class ProductsList extends Component {
                   type="radio"
                   id="radios2"
                   onClick={() => {
-                    this.state.sort = -1;
+                    this.setState({ sort: -1 });
                   }}
                 />
                 <label className="form-check-label" htmlFor="radios2">
