@@ -1,5 +1,8 @@
 let Material = require("../models/material_model");
 var Cart = require("../models/cart.model");
+
+let Summary = require("../models/summary.model")
+
 const express = require("express");
 const todoRoutes = express.Router();
 
@@ -12,6 +15,16 @@ todoRoutes.route("/getMaterials").get(function(req, res) {
     }
   }).sort({ material_code: 1 });
 });
+
+todoRoutes.route("/getOrders").get(function(req, res) {
+  Summary.find(function(err, orders) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.json(orders);
+    }
+  }).sort({ date: 1 });
+})
 
 todoRoutes.route("/getMaterials/filterPrice").get(function(req, res) {
   Material.find(
@@ -35,6 +48,20 @@ todoRoutes.route("/getMaterials/selectCategory").get(function(req, res) {
     }
   }).sort({ material_unitPrice: req.query.sort });
 });
+
+todoRoutes.route("/addSummary").post(function(req, res) {
+  let summary = new Summary(req.body);
+  summary
+    .save()
+    .then(summary => {
+      res.status(200).json({ summary: "summary added successfully"});
+      console.log("Summary added")
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).send("adding new summary failed")
+    })
+})
 
 todoRoutes.route("/addMaterial").post(function(req, res) {
   let material = new Material(req.body);

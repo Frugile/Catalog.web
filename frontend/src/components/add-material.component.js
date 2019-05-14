@@ -92,9 +92,6 @@ export default class AddMaterial extends Component {
       .catch(function(error) {
         console.log(error);
         alert(error);
-      })
-      .then(function() {
-        alert("Obraz został załadowany");
       });
 
     this.setState({
@@ -180,7 +177,6 @@ export default class AddMaterial extends Component {
               onChange={this.onFileChange}
             />
           </div>
-
           <div className="form-group">
             <input
               type="submit"

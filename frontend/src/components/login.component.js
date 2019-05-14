@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GoogleAPI, GoogleLogin, GoogleLogout } from "react-google-oauth";
+import { GoogleAPI, GoogleLogin } from "react-google-oauth";
 
 const responseGoogle = response => {
   console.log(response);
