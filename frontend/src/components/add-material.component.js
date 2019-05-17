@@ -5,6 +5,7 @@ export default class AddMaterial extends Component {
   constructor(props) {
     super(props);
 
+
     this.onChangeMaterialCode = this.onChangeMaterialCode.bind(this);
     this.onChangeMaterialCategory = this.onChangeMaterialCategory.bind(this);
     this.onChangeMaterialUnitPrice = this.onChangeMaterialUnitPrice.bind(this);
@@ -13,13 +14,15 @@ export default class AddMaterial extends Component {
     this.onChangeMaterialView = this.onChangeMaterialView.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
+
     this.state = {
       material_code: "",
       material_category: "",
       material_unitPrice: "",
       material_isAvalible: false,
       material_height: "",
-      material_view: ""
+      material_view: "",
+      progress: 0
     };
   }
 
@@ -87,11 +90,23 @@ export default class AddMaterial extends Component {
       material_height: this.state.material_height,
       material_view: this.state.material_view
     };
+    let config = {
+      onUploadProgress: progressEvent => {
+        console.log(progressEvent.loaded);
+        let percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
+        this.setState({
+          progress: percentCompleted
+        });
+
+      }
+    }
     axios
-      .post("http://localhost:4000/todos/addMaterial", newMaterial)
-      .catch(function(error) {
+      .post("http://localhost:4000/todos/addMaterial", newMaterial, config)
+      .catch(function (error) {
         console.log(error);
         alert(error);
+      }).then(function () {
+        alert("Obraz został załadowany");
       });
 
     this.setState({
@@ -159,7 +174,7 @@ export default class AddMaterial extends Component {
               onChange={this.onChangeMaterialHeight}
             />
           </div>
-          <div className="from-group">
+          {/* <div className="from-group">
             <label>View Code: </label>
             <input
               type="text"
@@ -167,7 +182,7 @@ export default class AddMaterial extends Component {
               value={this.state.material_view}
               onChange={this.onChangeMaterialView}
             />
-          </div>
+          </div> */}
           <div className="form-group">
             <label>Obraz:</label>
             <input
@@ -185,6 +200,11 @@ export default class AddMaterial extends Component {
             />
           </div>
         </form>
+
+        {/* <p>Ładowanie: {this.state.progress} / 100</p> */}
+        <div className="progress">
+          <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={this.state.progress} aria-valuemin="0" aria-valuemax="100" style={{ width: this.state.progress + '%' }}></div>
+        </div>
       </div>
     );
   }

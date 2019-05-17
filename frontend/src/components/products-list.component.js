@@ -29,12 +29,35 @@ const Product = props => (
               .then(response => {
                 console.log(response.data);
               })
-              .catch(function(error) {
+              .catch(function (error) {
                 console.log(error);
               });
           }}
         >
           Dodaj do koszyka
+        </button>
+        <button
+          type="radio"
+          name="a"
+          className="btn btn-outline-danger btn-sm"
+          onClick={() => {
+            axios
+              .get("http://localhost:4000/todos/deleteMaterial", {
+                params: {
+                  id: props.product._id
+                },
+                withCredentials: true
+              })
+              .then(response => {
+                console.log(response.data);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+
+          }}
+        >
+          Usuń z bazy
         </button>
       </div>
     </div>
@@ -65,7 +88,7 @@ export default class ProductsList extends Component {
       .then(response => {
         this.setState({ products: response.data });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -109,13 +132,13 @@ export default class ProductsList extends Component {
           console.log("componetDidUpdate TRUE");
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
 
   productsList() {
-    return this.state.products.map(function(currentProduct, i) {
+    return this.state.products.map(function (currentProduct, i) {
       return <Product product={currentProduct} key={i} />;
     });
   }
@@ -132,7 +155,7 @@ export default class ProductsList extends Component {
       .then(response => {
         this.setState({ products: response.data });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
     return;
@@ -151,7 +174,7 @@ export default class ProductsList extends Component {
       .then(response => {
         this.setState({ products: response.data });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
     return;
