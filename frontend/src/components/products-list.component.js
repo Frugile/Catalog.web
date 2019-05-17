@@ -50,6 +50,15 @@ const Product = props => (
               })
               .then(response => {
                 console.log(response.data);
+                // console.log(response.del);
+                console.log(response.data.ifDeleted.deletedCount);
+                if (response.data.ifDeleted.deletedCount == 1) {
+                  props.onDelete();
+                }
+                else {
+                  alert('Ten materiał został już usunięty')
+                }
+
               })
               .catch(function (error) {
                 console.log(error);
@@ -136,10 +145,13 @@ export default class ProductsList extends Component {
         console.log(error);
       });
   }
-
+  handleDelete = () => {
+    this.forceUpdate();
+  }
   productsList() {
-    return this.state.products.map(function (currentProduct, i) {
-      return <Product product={currentProduct} key={i} />;
+
+    return this.state.products.map((currentProduct, i) => {
+      return <Product product={currentProduct} key={i} onDelete={this.handleDelete} />;
     });
   }
 

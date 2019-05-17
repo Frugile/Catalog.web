@@ -103,10 +103,13 @@ todoRoutes.route("/deleteMaterial").get(async function (req, res) {
   // await sleep(2000);
   // await cart.add(req.query.id);
   console.log('delete route')
-  Material.deleteOne({ _id: req.query.id }, function (err) {
+  Material.deleteOne({ _id: req.query.id }, function (err, del) {
+    console.log(del)
     res.status(200).json({
-      cartMessange: "delete route run successfully "
+      cartMessange: "delete route run successfully",
+      ifDeleted: del
     });
+
     // deleted at most one tank document
   });
 
