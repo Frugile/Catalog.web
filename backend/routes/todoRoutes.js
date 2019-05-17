@@ -42,7 +42,7 @@ todoRoutes.route("/getMaterials/filterPrice").get(function (req, res) {
 });
 
 todoRoutes.route("/getMaterials/selectCategory").get(function (req, res) {
-  Material.find({ material_category: { $in: req.query.category } }, req.query.details, function (err, materials) {
+  Material.find({ material_category: { $in: req.query.category }, material_unitPrice: { $gte: req.query.valMin, $lt: req.query.valMax } }, req.query.details, function (err, materials) {
     if (err) {
       console.log(err);
     } else {
@@ -93,8 +93,10 @@ todoRoutes.route("/getMaterials/addToCart").get(async function (req, res) {
   await cart.add(req.query.id);
   req.session.cart = cart;
   req.session.save();
+  // console.log(cart);
   res.status(200).json({
-    cartMessange: "route run successfully " + req.session.cart.totalQty
+    cartMessange: "route run successfully " + req.session.cart.totalQty,
+    json: cart
   });
 });
 
@@ -112,8 +114,24 @@ todoRoutes.route("/deleteMaterial").get(async function (req, res) {
 
     // deleted at most one tank document
   });
+});
+todoRoutes.route("/updateMaterial").get(async function (req, res) {
+  // var cart = new Cart(req.session.cart ? req.session.cart : {});
+  // await sleep(2000);
+  // await cart.add(req.query.id);
+  console.log('update route')
+  Material.findOneAndUpdate({ _id: req.query.id }, { material_unitPrice: req.query.price }, function (err) {
+    // console.log(del)
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json({
+      cartMessange: "delete route run successfully",
+    });
 
 
+    // deleted at most one tank document
+  });
 });
 
 todoRoutes.route("/getMaterials/getCart").get(async function (req, res) {

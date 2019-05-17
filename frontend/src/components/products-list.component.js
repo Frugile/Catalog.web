@@ -27,7 +27,14 @@ const Product = props => (
                 withCredentials: true
               })
               .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
+                console.log(response.data.json);
+
+                var convert = require('xml-js');
+                var json = response.data.json
+                var options = { compact: true, ignoreComment: true, spaces: 4 };
+                var result = convert.json2xml(json, options);
+                console.log(result);
               })
               .catch(function (error) {
                 console.log(error);
@@ -68,6 +75,34 @@ const Product = props => (
         >
           Usuń z bazy
         </button>
+        <button
+          type="radio"
+          name="a"
+          className="btn btn-outline-info btn-sm"
+          onClick={() => {
+            axios
+              .get("http://localhost:4000/todos/updateMaterial", {
+                params: {
+                  id: props.product._id,
+                  price: props.product.material_unitPrice + 1
+                },
+                withCredentials: true
+              })
+              .then(response => {
+                console.log(response.data);
+                // console.log(response.del);
+                props.onDelete();
+
+
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+
+          }}
+        >
+          + cena
+        </button>
       </div>
     </div>
   </div>
@@ -79,7 +114,9 @@ export default class ProductsList extends Component {
     this.state = {
       products: [],
       sort: 1,
-      category: ["S1", "S2", "S3"]
+      category: ["S1", "S2", "S3"],
+      minPrice: 0,
+      maxPrice: 10000
     };
   }
 
@@ -129,7 +166,9 @@ export default class ProductsList extends Component {
         params: {
           details: "material_code material_unitPrice material_view",
           category: this.state.category,
-          sort: this.state.sort
+          sort: this.state.sort,
+          valMin: this.state.minPrice,
+          valMax: this.state.maxPrice
         },
         withCredentials: true
       })
@@ -252,10 +291,12 @@ export default class ProductsList extends Component {
                 className="btn btn-outline-info"
                 style={{ marginTop: 10, marginBottom: 10 }}
                 onClick={() => {
-                  this.filterPrice(
-                    document.getElementById("minimalPrice").value,
-                    document.getElementById("maximalPrice").value
-                  );
+                  this.setState({ minPrice: document.getElementById("minimalPrice").value })
+                  this.setState({ maxPrice: document.getElementById("maximalPrice").value })
+                  // this.filterPrice(
+                  //   document.getElementById("minimalPrice").value,
+                  //   document.getElementById("maximalPrice").value
+                  // );
                 }}
               >
                 Filtruj
