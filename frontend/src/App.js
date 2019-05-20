@@ -6,6 +6,7 @@ import setAuthToken from "./utilis/setAuthToken";
 import { setCurrentUser, logoutUser } from "../src/actions/authActions";
 
 import { Provider } from "react-redux";
+// import { connect } from "react-redux";
 import store from "./store";
 
 import Basket from "./components/basket.component";
@@ -19,7 +20,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Summary from "./components/summary.component";
 import OrdersList from "./components/allOrders.component";
 import Order from "./components/order.component";
-
+import Navbar from "./components/navbar.component"
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -47,7 +48,8 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Navbar />
+            {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <Link to="/" className="navbar-brand">
                 <h2>Catalog.web</h2>
               </Link>
@@ -64,6 +66,11 @@ class App extends Component {
                     </Link>
                   </li>
                   <li className="navbar-item">
+                    <Link to="/dashboard" className="nav-link">
+                      Dash
+                    </Link>
+                  </li>
+                  <li className="navbar-item">
                     <Link to="/addMaterial" className="nav-link">
                       Add Material
                     </Link>
@@ -75,7 +82,7 @@ class App extends Component {
                   </li>
                 </ul>
               </div>
-            </nav>
+            </nav> */}
             <Route exact path="/" component={ProductsList} />
             <Route path="/basket" component={Basket} />
             <Route path="/auth" component={Auth} />
@@ -83,10 +90,11 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/addMaterial" component={AddMaterial} />
             <Route path="/summary" component={Summary} />
-            <Route path="/allOrders" component={OrdersList} />
+            {/* <Route path="/allOrders" component={OrdersList} /> */}
             <Route path="/order" component={Order} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/allOrders" component={OrdersList} />
             </Switch>
           </div>
         </Router>
@@ -96,3 +104,12 @@ class App extends Component {
 }
 
 export default App;
+
+// const mapStateToProps = state => ({
+//   auth: state.auth
+// });
+
+// export default connect(
+//   mapStateToProps,
+//   { logoutUser }
+// )(App);
