@@ -27,7 +27,7 @@ class Register extends Component {
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
 
@@ -57,7 +57,7 @@ class Register extends Component {
       zipCode: this.state.zipCode,
       nipCode: this.state.nipCode
     };
-    console.log(newUser)
+    console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -66,148 +66,139 @@ class Register extends Component {
 
     return (
       <div className="container">
-        <div className="row">
+        <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
-                <b>Register</b> below
+                <b>Zarejestruj się</b> ponieżej
               </h4>
               <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
+                Już masz konto? <Link to="/login">Zaloguj się</Link>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+              <div className="input-field col-lg-4 col-sm-8">
+                <label htmlFor="name">Imię i nazwisko</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.name}
                   error={errors.name}
                   id="name"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="name">Name</label>
+
                 <span className="text-danger">{errors.name}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="email">Email</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
                   error={errors.email}
                   id="email"
                   type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="email">Email</label>
+
                 <span className="text-danger">{errors.email}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="password">Hasło</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
                   error={errors.password}
                   id="password"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="password">Password</label>
+
                 <span className="text-danger">{errors.password}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="password2">Potwierdź hasło</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
                   error={errors.password2}
                   id="password2"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="password2">Confirm Password</label>
+
                 <span className="text-danger">{errors.password2}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="companyName">Nazwa firmy</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.companyName}
                   error={errors.companyName}
                   id="companyName"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.companyName
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="companyName">Company Name</label>
+
                 <span className="text-danger">{errors.companyName}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="address">Adres</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.address}
                   error={errors.address}
                   id="address"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.address
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="address">Address</label>
+
                 <span className="text-danger">{errors.address}</span>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="city">Miasto</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.city}
                   error={errors.city}
                   id="city"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.city
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="city">City</label>
+
                 <span className="text-danger">{errors.city}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="zipCode">Kod pocztowy</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.zipCode}
                   error={errors.zipCode}
                   id="zipCode"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.zipCode
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="zipCode">Zip Code</label>
+
                 <span className="text-danger">{errors.zipCode}</span>
               </div>
 
-              <div className="input-field col s12">
+              <div className="input-field  col-lg-4 col-sm-8">
+                <label htmlFor="nipCode">Kod NIP</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.nipCode}
                   error={errors.nipCode}
                   id="nipCode"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.nipCode
-                  })}
+                  className="form-control"
                 />
-                <label htmlFor="nipCode">Nip Code</label>
+
                 <span className="text-danger">{errors.nipCode}</span>
               </div>
 
@@ -222,7 +213,7 @@ class Register extends Component {
                   type="submit"
                   className="btn btn-primary"
                 >
-                  Sign up
+                  Zarejestruj się
                 </button>
               </div>
             </form>

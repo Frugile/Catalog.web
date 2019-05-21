@@ -50,21 +50,29 @@ class Navbar extends Component {
                 Auth
               </Link>
             </li> */}
-            <li className="navbar-item">
+            {/* <li className="navbar-item">
               <Link to="/dashboard" className="nav-link">
                 Dash
               </Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/addMaterial" className="nav-link">
-                Add Material
-              </Link>
-            </li>
-            <li className="navbar-item">
+            </li> */}
+            {this.state.userName === undefined ? (
+              ""
+            ) : (
+              <li className="navbar-item">
+                <Link to="/addMaterial" className="nav-link">
+                  +Materiał{" "}
+                </Link>
+              </li>
+            )}
+
+            {this.state.userName === undefined ? (
+              ""
+            ) : (
               <Link to="/allOrders" className="nav-link">
                 Zamówienia
               </Link>
-            </li>
+            )}
+            <li className="navbar-item" />
             <li className="navbar-item nav-link">
               <strong>
                 {this.state.userName === undefined

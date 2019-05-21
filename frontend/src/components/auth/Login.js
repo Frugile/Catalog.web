@@ -55,15 +55,14 @@ class Login extends Component {
 
     return (
       <div className="container">
-        {console.log(this.props)}
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <div className="col s12">
               <h4>
-                <b>Login</b> below
+                <b>Zaloguj się</b> poniżej
               </h4>
               <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+                Nie masz konta? <Link to="/register">Zarejestruj się</Link>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
@@ -84,7 +83,7 @@ class Login extends Component {
                 </span>
               </div>
               <div className="input-field col-lg-4 col-sm-8">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Hasło</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
@@ -110,7 +109,7 @@ class Login extends Component {
                   type="submit"
                   className="btn btn-primary"
                 >
-                  Login
+                  Zaloguj
                 </button>
               </div>
             </form>

@@ -95,15 +95,16 @@ class App extends Component {
             <Route path="/auth" component={Auth} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
-            <Route path="/addMaterial" component={AddMaterial} />
-            <Route path="/summary" component={Summary} />
+
             {/* <Route path="/allOrders" component={OrdersList} /> */}
             <Route path="/order" component={Order} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/allOrders" component={OrdersList} />
+              <PrivateRoute path="/summary" component={Summary} />
+              <PrivateRoute path="/addMaterial" component={AddMaterial} />
+              <PrivateRoute path="userOrders" component={UserOrders} />
             </Switch>
-            <Route path="userOrders" component={UserOrders} />
           </div>
         </Router>
       </Provider>
