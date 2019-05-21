@@ -160,7 +160,9 @@ export default class ProductsList extends Component {
   render() {
     return (
       <div className="container">
-        <h3>Products list</h3>
+        <h3 style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+          <b>Materiały</b>, które możesz kupić
+        </h3>
         <div className="row">
           <div className="col-2">
             <div className="btn-group-vertical">

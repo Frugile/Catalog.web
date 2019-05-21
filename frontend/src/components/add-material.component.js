@@ -107,10 +107,12 @@ export default class AddMaterial extends Component {
   render() {
     return (
       <div style={{ marginTop: 20 }}>
-        <h3>Add New Material</h3>
+        <h3>
+          <b>Dodaj materiał</b> do bazy
+        </h3>
         <form onSubmit={this.onSubmit}>
           <div className="from-group">
-            <label>Code: </label>
+            <label>Nazwa</label>
             <input
               type="text"
               className="form-control"
@@ -119,7 +121,7 @@ export default class AddMaterial extends Component {
             />
           </div>
           <div className="from-group">
-            <label>Category: </label>
+            <label>Kategoria</label>
             <input
               type="text"
               className="form-control"
@@ -128,7 +130,7 @@ export default class AddMaterial extends Component {
             />
           </div>
           <div className="from-group">
-            <label>Unit Price: </label>
+            <label>Cena za jednostkę </label>
             <input
               type="text"
               className="form-control"
@@ -136,6 +138,25 @@ export default class AddMaterial extends Component {
               onChange={this.onChangeMaterialUnitPrice}
             />
           </div>
+
+          <div className="from-group">
+            <label>Wysokość rolki</label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.material_height}
+              onChange={this.onChangeMaterialHeight}
+            />
+          </div>
+          {/* <div className="from-group">
+            <label>Obraz w Base64</label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.material_view}
+              onChange={this.onChangeMaterialView}
+            />
+          </div> */}
           <div className="form-check">
             <input
               type="checkbox"
@@ -147,29 +168,11 @@ export default class AddMaterial extends Component {
               value={this.state.material_isAvalible}
             />
             <label className="form-check-label" htmlFor="completedCheckbox">
-              IsAvalible
+              Jest dostępny
             </label>
           </div>
-          <div className="from-group">
-            <label>Height: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.material_height}
-              onChange={this.onChangeMaterialHeight}
-            />
-          </div>
-          <div className="from-group">
-            <label>View Code: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.material_view}
-              onChange={this.onChangeMaterialView}
-            />
-          </div>
           <div className="form-group">
-            <label>Obraz:</label>
+            <label>Zdjęcie</label>
             <input
               type="file"
               accept="image/*"
@@ -178,11 +181,7 @@ export default class AddMaterial extends Component {
             />
           </div>
           <div className="form-group">
-            <input
-              type="submit"
-              value="Add Material"
-              className="btn btn-primary"
-            />
+            <input type="submit" value="Dodaj" className="btn btn-primary" />
           </div>
         </form>
       </div>

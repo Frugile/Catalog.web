@@ -51,45 +51,7 @@ class App extends Component {
         <Router>
           <div className="container">
             <Navbar />
-            {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link to="/" className="navbar-brand">
-                <h2>Catalog.web</h2>
-              </Link>
-              <div className="navbar-expand">
-                <ul className="navbar-nav mr-auto">
-                  <li className="navbar-item">
-                    <Link to="/basket" className="nav-link">
-                      Koszyk
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/auth" className="nav-link">
-                      Auth
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/dashboard" className="nav-link">
-                      Dash
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/addMaterial" className="nav-link">
-                      Add Material
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/allOrders" className="nav-link">
-                      Wszystkie Zamówienia
-                    </Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/userOrders" className="nav-link">
-                      Moje Zamówienia
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </nav> */}
+
             <Route exact path="/" component={ProductsList} />
             <Route path="/basket" component={Basket} />
             <Route path="/auth" component={Auth} />
@@ -105,6 +67,7 @@ class App extends Component {
               <PrivateRoute path="/addMaterial" component={AddMaterial} />
               <PrivateRoute path="userOrders" component={UserOrders} />
             </Switch>
+            <Route path="/userOrders" component={UserOrders} />
           </div>
         </Router>
       </Provider>

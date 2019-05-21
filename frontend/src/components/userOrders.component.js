@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 const Order = props => (
   <tr>
     <td>
-      <Link>{props.order.date}</Link>
+      <Link to={"/order"} params={props.order.id}>
+        {props.order.date}
+      </Link>
     </td>
     <td>{props.order.email}</td>
     <td>{props.order.basket.totalPrice}</td>
