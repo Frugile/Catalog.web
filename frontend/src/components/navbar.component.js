@@ -34,7 +34,7 @@ class Navbar extends Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light ">
         <Link to="/" className="navbar-brand">
           <h2>Catalog.web</h2>
         </Link>
@@ -45,11 +45,11 @@ class Navbar extends Component {
                 Koszyk
               </Link>
             </li>
-            <li className="navbar-item">
+            {/* <li className="navbar-item">
               <Link to="/auth" className="nav-link">
                 Auth
               </Link>
-            </li>
+            </li> */}
             <li className="navbar-item">
               <Link to="/dashboard" className="nav-link">
                 Dash
@@ -62,18 +62,30 @@ class Navbar extends Component {
             </li>
             <li className="navbar-item">
               <Link to="/allOrders" className="nav-link">
-                Wszystkie Zamówienia
+                Zamówienia
               </Link>
+            </li>
+            <li className="navbar-item nav-link">
+              <strong>
+                {this.state.userName === undefined
+                  ? ""
+                  : this.state.userName.split(" ")[0]}
+              </strong>
             </li>
           </ul>
         </div>
-        ...
-        {/* {this.state.userName.split(" ")[0]} */}
-        {this.state.userName == "" ? "" : "niepuste"}
-        {this.state.userName}
-        <button onClick={this.onLogoutClick} className="btn btn-smal">
-          Wyloguj
-        </button>
+        {this.state.userName === undefined ? (
+          <Link to="/login" className="btn btn-outline-dark btn-sm">
+            Zaloguj
+          </Link>
+        ) : (
+          <button
+            onClick={this.onLogoutClick}
+            className="btn btn-outline-dark btn-sm"
+          >
+            Wyloguj
+          </button>
+        )}
       </nav>
     );
   }

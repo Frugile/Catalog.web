@@ -29,7 +29,8 @@ app.use(bodyParser.json({ limit: "5mb" }));
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
-mongoose.connect("mongodb://127.0.0.1:27017/todos", { useNewUrlParser: true });
+mongoose.connect("mongodb://127.0.0.1:27017/todos", { useNewUrlParser: true }); // local
+
 const connection = mongoose.connection;
 connection.once("open", function() {
   console.log("MongoDB connection established successfully");
