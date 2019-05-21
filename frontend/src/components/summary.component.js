@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const Product = props => (
   <tr>
@@ -14,38 +14,27 @@ class Summary extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUserName = this.onChangeUserName.bind(this);
-    this.onChangeUserMail = this.onChangeUserMail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       products: [],
       totalQty: 0,
       totalPrice: 0,
-      user_name: "",
-      user_mail: "",
-      cart: JSON
+      cart: JSON,
+
+      companyName: "",
+      address: "",
+      city: "",
+      zipCode: "",
+      nipCode: ""
     };
-  }
-
-  onChangeUserName(e) {
-    this.setState({
-      user_name: e.target.value
-    });
-  }
-
-  onChangeUserMail(e) {
-    this.setState({
-      user_mail: e.target.value
-    });
   }
 
   onSubmit(e) {
     e.preventDefault();
 
     const newSummary = {
-      name: this.state.user_name,
-      email: this.state.user_mail,
+      user: this.props.auth.user.id,
       basket: this.state.cart
     };
 
@@ -81,7 +70,31 @@ class Summary extends Component {
       .catch(function(error) {
         console.log(error);
       });
-    console.log(this.state);
+
+    await axios
+      .get("http://localhost:4000/todos/getUser", {
+        params: {
+          id: this.props.auth.user.id,
+          details: "companyName address city zipCode nipCode"
+        },
+        withCredentials: true
+      })
+      .then(response => {
+        var user = response.data;
+
+        console.log(user);
+
+        this.setState({
+          companyName: user.companyName,
+          address: user.address,
+          city: user.city,
+          zipCode: user.zipCode,
+          nipCode: user.nipCode
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   productList() {
@@ -119,26 +132,50 @@ class Summary extends Component {
             </table>
           </div>
           <div className="col-6">
-            <form onSubmit={this.onSubmit}>
-              <div className="from-group">
-                <label>Nazwisko i imię: </label>
+            <form onSubmit="submit">
+              <div className="form-group">
+                <label>Nazwa:</label>
                 <input
-                  type="text"
                   className="form-control"
-                  value={this.state.user_name}
-                  onChange={this.onChangeUserName}
+                  value={this.state.companyName}
+                  disabled="disabled"
                 />
               </div>
-              <div className="from-group">
-                <label>E-mail: </label>
+              <div className="form-group">
+                <label>Adres:</label>
                 <input
-                  type="text"
                   className="form-control"
-                  value={this.state.user_mail}
-                  onChange={this.onChangeUserMail}
+                  value={this.state.address}
+                  disabled="disabled"
                 />
               </div>
-              <div className="form-group" style={{ marginTop: 20 }}>
+              <div className="row">
+                <div className="form-group col-sm-6">
+                  <label>Miejscowość:</label>
+                  <input
+                    className="form-control"
+                    value={this.state.city}
+                    disabled="disabled"
+                  />
+                </div>
+                <div className="form-group col-sm-6">
+                  <label>Kod pocztowy:</label>
+                  <input
+                    className="form-control"
+                    value={this.state.zipCode}
+                    disabled="disabled"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Nip:</label>
+                <input
+                  className="form-control"
+                  value={this.state.nipCode}
+                  disabled="disabled"
+                />
+              </div>
+              <div className="form-group" style={{ marginTop: 30 }}>
                 <input
                   type="submit"
                   value="Potwierdź i zamów"

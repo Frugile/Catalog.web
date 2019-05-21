@@ -20,7 +20,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Summary from "./components/summary.component";
 import OrdersList from "./components/allOrders.component";
 import Order from "./components/order.component";
-import Navbar from "./components/navbar.component"
+import Navbar from "./components/navbar.component";
+import UserOrders from "./components/userOrders.component";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -80,6 +82,11 @@ class App extends Component {
                       Wszystkie Zamówienia
                     </Link>
                   </li>
+                  <li className="navbar-item">
+                    <Link to="/userOrders" className="nav-link">
+                      Moje Zamówienia
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </nav> */}
@@ -96,6 +103,7 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/allOrders" component={OrdersList} />
             </Switch>
+            <Route path="userOrders" component={UserOrders} />
           </div>
         </Router>
       </Provider>
@@ -104,12 +112,3 @@ class App extends Component {
 }
 
 export default App;
-
-// const mapStateToProps = state => ({
-//   auth: state.auth
-// });
-
-// export default connect(
-//   mapStateToProps,
-//   { logoutUser }
-// )(App);

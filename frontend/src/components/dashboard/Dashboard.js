@@ -51,7 +51,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Dashboard);
+export default connect(mapStateToProps, { logoutUser })(Dashboard);
