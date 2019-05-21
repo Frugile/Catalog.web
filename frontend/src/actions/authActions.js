@@ -7,6 +7,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   console.log("registerUser");
+  console.log(userData);
   axios
     .post("http://localhost:4000/users/register", userData)
     .then(res => history.push("/login")) // re-direct to login on successful register

@@ -17,6 +17,7 @@ const User = require("../models/user.model");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
+  console.log(req.body)
 
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -32,8 +33,15 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        companyName: req.body.companyName,
+        address: req.body.address,
+        city: req.body.city,
+        zipCode: req.body.zipCode,
+        nipCode: req.body.nipCode
       });
+
+      console.log(newUser)
 
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
@@ -105,5 +113,4 @@ router.post("/login", (req, res) => {
     });
   });
 });
-
 module.exports = router;

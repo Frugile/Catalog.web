@@ -19,6 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Summary from "./components/summary.component";
 import OrdersList from "./components/allOrders.component";
 import Order from "./components/order.component";
+import UserOrders from "./components/userOrders.component";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -73,6 +74,11 @@ class App extends Component {
                       Wszystkie Zamówienia
                     </Link>
                   </li>
+                  <li className="navbar-item">
+                    <Link to="/userOrders" className="nav-link">
+                      Moje Zamówienia
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </nav>
@@ -88,6 +94,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
+            <Route path="userOrders" component={UserOrders}/>
           </div>
         </Router>
       </Provider>

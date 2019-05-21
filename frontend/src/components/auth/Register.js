@@ -15,6 +15,11 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
+      companyName: "",
+      address: "",
+      city: "",
+      zipCode: "",
+      nipCode: "",
       errors: {}
     };
   }
@@ -45,9 +50,14 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      companyName: this.state.companyName,
+      address: this.state.address,
+      city: this.state.city,
+      zipCode: this.state.zipCode,
+      nipCode: this.state.nipCode
     };
-    console.log("onSubmit register");
+    console.log(newUser)
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -81,6 +91,7 @@ class Register extends Component {
                 <label htmlFor="name">Name</label>
                 <span className="text-danger">{errors.name}</span>
               </div>
+
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -95,6 +106,7 @@ class Register extends Component {
                 <label htmlFor="email">Email</label>
                 <span className="text-danger">{errors.email}</span>
               </div>
+
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -109,6 +121,7 @@ class Register extends Component {
                 <label htmlFor="password">Password</label>
                 <span className="text-danger">{errors.password}</span>
               </div>
+
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -123,6 +136,81 @@ class Register extends Component {
                 <label htmlFor="password2">Confirm Password</label>
                 <span className="text-danger">{errors.password2}</span>
               </div>
+
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.companyName}
+                  error={errors.companyName}
+                  id="companyName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.companyName
+                  })}
+                />
+                <label htmlFor="companyName">Company Name</label>
+                <span className="text-danger">{errors.companyName}</span>
+              </div>
+
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.address}
+                  error={errors.address}
+                  id="address"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.address
+                  })}
+                />
+                <label htmlFor="address">Address</label>
+                <span className="text-danger">{errors.address}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.city}
+                  error={errors.city}
+                  id="city"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.city
+                  })}
+                />
+                <label htmlFor="city">City</label>
+                <span className="text-danger">{errors.city}</span>
+              </div>
+
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.zipCode}
+                  error={errors.zipCode}
+                  id="zipCode"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.zipCode
+                  })}
+                />
+                <label htmlFor="zipCode">Zip Code</label>
+                <span className="text-danger">{errors.zipCode}</span>
+              </div>
+
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.nipCode}
+                  error={errors.nipCode}
+                  id="nipCode"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.nipCode
+                  })}
+                />
+                <label htmlFor="nipCode">Nip Code</label>
+                <span className="text-danger">{errors.nipCode}</span>
+              </div>
+
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{

@@ -8,13 +8,6 @@ let summary = new Schema({
   },
   user: {
     type: String,
-    default: "Unknown"
-  },
-  name: {
-    type: String
-  },
-  email: {
-    type: String
   },
   basket: {
     type: JSON

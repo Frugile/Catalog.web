@@ -17,6 +17,29 @@ let UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  companyName: {
+    type: String,
+    require: true
+  },
+  address: {
+    type: String,
+    require: true
+  },
+  city: {
+    type: String,
+    require: true
+  },
+  zipCode: {
+    type: String,
+    require: true
+  },
+  nipCode: {
+    type: String,
+    require: true
+  },
+  cart: {
+    type: JSON
   }
 });
 
