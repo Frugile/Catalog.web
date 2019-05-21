@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 
 const Product = props => (
   <tr>
@@ -42,7 +43,7 @@ const Product = props => (
   </tr>
 );
 
-export default class Basket extends Component {
+class Basket extends Component {
   constructor(props) {
     super(props);
     this.state = { products: [], totalQty: 0, totalPrice: 0 };
@@ -135,11 +136,28 @@ export default class Basket extends Component {
             </tr>
           </tbody>
         </table>
-
-        <Link to={"/summary"}>
-          <button className="btn btn-primary">Podsumowanie</button>
-        </Link>
+        {this.props.auth.isAuthenticated ? (
+          <Link to={"/summary"}>
+            <button className="btn btn-primary">Podsumowanie</button>
+          </Link>
+        ) : (
+          <Link to={"/login"}>
+            <button className="btn btn-outline-primary">
+              Zaloguj się, aby mieć możliwość złożenia zamówienia
+            </button>
+          </Link>
+        )}
+        {/* <Link to={"/login"}>
+          <button className="btn btn-primary">Zaloguj</button>
+        </Link> */}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  // auth: state.auth,
+  ...state
+});
+
+export default connect(mapStateToProps)(Basket);

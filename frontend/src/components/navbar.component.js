@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   render() {
     // var { user } = this.props.auth;
-    console.log(this.props.auth);
+    // console.log(this.props.auth);
     // if (user) {
     //   user = { name: "Anonim" };
     // }

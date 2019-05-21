@@ -17,15 +17,16 @@ class Login extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard"); // push user to dashboard when they login
+      // this.props.history.push("/");
+      this.props.history.goBack();
     }
-    console.log(typeof nextProps.errors);
+    // console.log(typeof nextProps.errors);
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -46,7 +47,7 @@ class Login extends Component {
     };
     this.props.loginUser(userData);
 
-    console.log(userData);
+    // console.log(userData);
   };
 
   render() {
@@ -54,6 +55,7 @@ class Login extends Component {
 
     return (
       <div className="container">
+        {console.log(this.props)}
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <div className="col s12">
