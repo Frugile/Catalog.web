@@ -65,6 +65,11 @@ class Navbar extends Component {
                 Zamówienia
               </Link>
             </li>
+            <li className="navbar-item">
+              <Link to="/userOrders" className="nav-link">
+                Moje Zamówienia
+              </Link>
+            </li>
             <li className="navbar-item nav-link">
               <strong>
                 {this.state.userName === undefined

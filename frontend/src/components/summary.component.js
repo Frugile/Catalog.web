@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
@@ -30,22 +31,19 @@ class Summary extends Component {
     };
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-
+  onSubmit() {
     const newSummary = {
       user: this.props.auth.user.id,
       basket: this.state.cart
     };
 
     axios
-      .post("http://localhost:4000/todos/addSummary", newSummary)
+      .post("http://localhost:4000/todos/addSummary", newSummary, {
+        withCredentials: true
+      })
       .catch(function(error) {
         console.log(error);
         alert(error);
-      })
-      .then(function() {
-        window.open("http://localhost:3000");
       });
   }
 
@@ -82,8 +80,6 @@ class Summary extends Component {
       .then(response => {
         var user = response.data;
 
-        console.log(user);
-
         this.setState({
           companyName: user.companyName,
           address: user.address,
@@ -106,10 +102,6 @@ class Summary extends Component {
   render() {
     return (
       <div style={{ marginTop: 20 }}>
-        {console.log("State")}
-        {console.log(this.state)}
-        {console.log("Props")}
-        {console.log(this.props)}
         <h3>Podsumowanie</h3>
         <div className="row" style={{ marginTop: 20 }}>
           <div className="col-6">
@@ -175,13 +167,9 @@ class Summary extends Component {
                   disabled="disabled"
                 />
               </div>
-              <div className="form-group" style={{ marginTop: 30 }}>
-                <input
-                  type="submit"
-                  value="Potwierdź i zamów"
-                  className="btn btn-primary"
-                />
-              </div>
+              <Link to={"/"}>
+                <button className="btn btn-primary" onClick={this.onSubmit}>Potwierdź i zamów</button>
+              </Link>
             </form>
           </div>
         </div>
@@ -191,7 +179,6 @@ class Summary extends Component {
 }
 
 const mapStateToProps = state => ({
-  // auth: state.auth,
   ...state
 });
 

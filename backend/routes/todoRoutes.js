@@ -75,6 +75,7 @@ todoRoutes.route("/getMaterials/updateCart").get(async function(req, res) {
 
 todoRoutes.route("/addSummary").post(function(req, res) {
   let summary = new Summary(req.body);
+  console.log(summary)
   summary
     .save()
     .then(summary => {
@@ -116,5 +117,15 @@ todoRoutes.route("/getUserOrders").get(function(req, res) {
     }
   }).sort({ date: 1 });
 })
+
+todoRoutes.route("/getOrder").get(function(req, res) {
+  Summary.findById(req.query.id, function(err, order) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(order);
+    }
+  });
+});
 
 module.exports = todoRoutes;
