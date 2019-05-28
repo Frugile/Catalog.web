@@ -119,7 +119,7 @@ todoRoutes.route("/getUserOrders").get(function(req, res) {
 })
 
 todoRoutes.route("/getOrder").get(function(req, res) {
-  Summary.findById(req.query.id, function(err, order) {
+  Summary.findById(req.query.id, req.query.details, function(err, order) {
     if (err) {
       console.log(err);
     } else {

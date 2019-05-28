@@ -44,6 +44,8 @@ if (localStorage.jwtToken) {
   }
 }
 
+
+
 class App extends Component {
   render() {
     return (
@@ -60,12 +62,12 @@ class App extends Component {
             <Route path="/addMaterial" component={AddMaterial} />
             <Route path="/summary" component={Summary} />
             {/* <Route path="/allOrders" component={OrdersList} /> */}
-            <Route path="/order" component={Order} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/allOrders" component={OrdersList} />
             </Switch>
             <Route path="/userOrders" component={UserOrders} />
+            <Route path="/order" component={Order} />
           </div>
         </Router>
       </Provider>
