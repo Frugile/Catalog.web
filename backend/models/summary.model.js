@@ -11,6 +11,10 @@ let summary = new Schema({
   },
   basket: {
     type: JSON
+  },
+  isCompleted: {
+    type: Boolean,
+    default: false
   }
 });
 

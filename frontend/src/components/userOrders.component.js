@@ -7,7 +7,7 @@ const Order = props => (
   <tr>
     <td>
       <Link to={{
-        pathname: "/order", 
+        pathname: "/orderCustomer", 
         state: {
           data: props.order._id
         }

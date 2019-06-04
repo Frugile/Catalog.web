@@ -9,7 +9,7 @@ const Product = props => (
   </tr>
 );
 
-export default class Order extends Component {
+export default class OrderCustomer extends Component {
   state = {
     products: [],
     basket: [],
