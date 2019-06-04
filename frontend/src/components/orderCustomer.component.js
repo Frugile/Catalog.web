@@ -1,6 +1,14 @@
 import axios from "axios";
 import React, { Component } from "react";
-
+function formatDate(date) {
+  date = new Date(date);
+  var day = date.getDate();
+  day = day > 9 ? day : "0" + day;
+  var month = date.getMonth() + 1;
+  month = month > 9 ? month : "0" + month;
+  var year = date.getFullYear();
+  return day + "." + month + "." + year;
+}
 const Product = props => (
   <tr>
     <td>{props.product.name}</td>
@@ -14,14 +22,14 @@ export default class OrderCustomer extends Component {
     products: [],
     basket: [],
     date: ""
-  }
-  
+  };
+
   async componentDidMount() {
     await axios
       .get("http://localhost:4000/todos/getOrder", {
         params: {
           id: this.props.location.state.data,
-          details: "basket date",
+          details: "basket date"
         }
       })
       .then(response => {
@@ -30,17 +38,17 @@ export default class OrderCustomer extends Component {
           temp.push(response.data.basket.items[id]);
         }
 
-        this.setState({ 
+        this.setState({
           basket: response.data.basket,
           date: response.data.date,
           products: temp
-        })
+        });
       })
       .catch(function(error) {
         console.log(error);
       });
 
-      console.log(this.state.products)
+    console.log(this.state.products);
   }
 
   productList() {
@@ -52,27 +60,33 @@ export default class OrderCustomer extends Component {
   render() {
     return (
       <div>
-        <label htmlFor="date" style={{marginTop:20}}>Data zamówienia:</label>
-        <div id="date" style={{marginLeft:20}}>{this.state.date}</div>
-        <label htmlFor="products" style={{marginTop:20}}>Szczegóły:</label>
+        <label htmlFor="date" style={{ marginTop: 20 }}>
+          Data zamówienia:
+        </label>
+        <div id="date" style={{ marginLeft: 20 }}>
+          {formatDate(this.state.date)}
+        </div>
+        <label htmlFor="products" style={{ marginTop: 20 }}>
+          Szczegóły:
+        </label>
         <table id="products" className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Produkt</th>
-                  <th>Ilość</th>
-                  <th>Cena</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.productList()}
-                <tr className="table-secondary font-weight-bold">
-                  <td>Łącznie</td>
-                  <td>{this.state.basket.totalQty}</td>
-                  <td>{this.state.basket.totalPrice}</td>
-                </tr>
-              </tbody>
-            </table>
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>Ilość</th>
+              <th>Cena</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.productList()}
+            <tr className="table-secondary font-weight-bold">
+              <td>Łącznie</td>
+              <td>{this.state.basket.totalQty}</td>
+              <td>{this.state.basket.totalPrice}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    )
+    );
   }
 }

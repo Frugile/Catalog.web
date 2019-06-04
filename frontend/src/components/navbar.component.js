@@ -79,6 +79,15 @@ class Navbar extends Component {
             ) : (
               <li className="navbar-item">
                 <Link to="/userOrders" className="nav-link">
+                  Twoje zamówienia
+                </Link>
+              </li>
+            )}
+            {this.state.userName === undefined ? (
+              ""
+            ) : (
+              <li className="navbar-item">
+                <Link to="/allOrders" className="nav-link">
                   Zamówienia
                 </Link>
               </li>

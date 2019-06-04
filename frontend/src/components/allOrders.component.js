@@ -1,17 +1,34 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+function formatDate(date) {
+  date = new Date(date);
+  var day = date.getDate();
+  day = day > 9 ? day : "0" + day;
+  var month = date.getMonth() + 1;
+  month = month > 9 ? month : "0" + month;
+  var year = date.getFullYear();
+  return day + "." + month + "." + year;
+}
 
 const Order = props => (
   <tr>
     <td>
-      <Link to={{
-        pathname: "/orderWholesale", 
-        state: {
-          id: props.order._id
-        }
-      }}>
-        {!props.order.isCompleted ? props.order.date : <p><s>{props.order.date}</s></p> }
+      <Link
+        to={{
+          pathname: "/orderWholesale",
+          state: {
+            id: props.order._id
+          }
+        }}
+      >
+        {!props.order.isCompleted ? (
+          formatDate(props.order.date)
+        ) : (
+          <p>
+            <s>{formatDate(props.order.date)}</s>
+          </p>
+        )}
       </Link>
     </td>
     <td>{props.order.basket.totalPrice}</td>
@@ -53,7 +70,7 @@ export default class OrdersList extends Component {
             <thead>
               <tr>
                 <th>Data</th>
-                <th>Wartość zamówienia</th>              
+                <th>Wartość zamówienia</th>
               </tr>
             </thead>
             <tbody>{this.ordersList()}</tbody>

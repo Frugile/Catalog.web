@@ -2,20 +2,30 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link, Route } from "react-router-dom";
-
+function formatDate(date) {
+  date = new Date(date);
+  var day = date.getDate();
+  day = day > 9 ? day : "0" + day;
+  var month = date.getMonth() + 1;
+  month = month > 9 ? month : "0" + month;
+  var year = date.getFullYear();
+  return day + "." + month + "." + year;
+}
 const Order = props => (
   <tr>
     <td>
-      <Link to={{
-        pathname: "/orderCustomer", 
-        state: {
-          data: props.order._id
-        }
-      }}>
-        {props.order.date}
+      <Link
+        to={{
+          pathname: "/orderCustomer",
+          state: {
+            data: props.order._id
+          }
+        }}
+      >
+        {formatDate(props.order.date)}
       </Link>
     </td>
-    <td>{props.order._id}</td>
+    {/* <td>{props.order._id}</td> */}
     <td>{props.order.basket.totalPrice}</td>
   </tr>
 );
@@ -60,7 +70,7 @@ class UserOrders extends Component {
             <thead>
               <tr>
                 <th>Data</th>
-                <th>Email</th>
+                {/* <th>Email</th> */}
                 <th>Wartość zamówienia</th>
               </tr>
             </thead>
