@@ -19,7 +19,8 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Summary from "./components/summary.component";
 import OrdersList from "./components/allOrders.component";
-import Order from "./components/order.component";
+import OrderCustomer from "./components/orderCustomer.component";
+import OrderWholesale from "./components/orderWholesale.component";
 import Navbar from "./components/navbar.component";
 import UserOrders from "./components/userOrders.component";
 
@@ -59,7 +60,6 @@ class App extends Component {
             <Route path="/login" component={Login} />
 
             {/* <Route path="/allOrders" component={OrdersList} /> */}
-            <Route path="/order" component={Order} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/allOrders" component={OrdersList} />
@@ -68,6 +68,8 @@ class App extends Component {
               <PrivateRoute path="userOrders" component={UserOrders} />
             </Switch>
             <Route path="/userOrders" component={UserOrders} />
+            <Route path="/orderCustomer" component={OrderCustomer} />
+            <Route path="/orderWholesale" component={OrderWholesale} />
           </div>
         </Router>
       </Provider>

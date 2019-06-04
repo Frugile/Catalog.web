@@ -6,11 +6,16 @@ import { Link, Route } from "react-router-dom";
 const Order = props => (
   <tr>
     <td>
-      <Link to={"/order"} params={props.order.id}>
+      <Link to={{
+        pathname: "/orderCustomer", 
+        state: {
+          data: props.order._id
+        }
+      }}>
         {props.order.date}
       </Link>
     </td>
-    <td>{props.order.email}</td>
+    <td>{props.order._id}</td>
     <td>{props.order.basket.totalPrice}</td>
   </tr>
 );
@@ -68,6 +73,7 @@ class UserOrders extends Component {
 }
 
 const mapStateToProps = state => ({
+  testData: state.testData,
   ...state
 });
 

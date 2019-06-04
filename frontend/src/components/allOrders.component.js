@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 const Order = props => (
   <tr>
     <td>
-      <Link>{props.order.date}</Link>
+      <Link to={{
+        pathname: "/orderWholesale", 
+        state: {
+          id: props.order._id
+        }
+      }}>
+        {!props.order.isCompleted ? props.order.date : <p><s>{props.order.date}</s></p> }
+      </Link>
     </td>
-    <td>{props.order.email}</td>
     <td>{props.order.basket.totalPrice}</td>
   </tr>
 );
@@ -47,8 +53,7 @@ export default class OrdersList extends Component {
             <thead>
               <tr>
                 <th>Data</th>
-                <th>Email</th>
-                <th>Wartość zamówienia</th>
+                <th>Wartość zamówienia</th>              
               </tr>
             </thead>
             <tbody>{this.ordersList()}</tbody>

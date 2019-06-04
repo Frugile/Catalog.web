@@ -105,7 +105,7 @@ todoRoutes.route("/getOrders").get(function(req, res) {
     } else {
       res.json(orders);
     }
-  }).sort({ date: 1 });
+  }).sort({ date: -1 });
 })
 
 todoRoutes.route("/getUserOrders").get(function(req, res) {
@@ -115,11 +115,11 @@ todoRoutes.route("/getUserOrders").get(function(req, res) {
     } else {
       res.json(orders);
     }
-  }).sort({ date: 1 });
+  }).sort({ date: -1 });
 })
 
 todoRoutes.route("/getOrder").get(function(req, res) {
-  Summary.findById(req.query.id, function(err, order) {
+  Summary.findById(req.query.id, req.query.details, function(err, order) {
     if (err) {
       console.log(err);
     } else {
@@ -127,5 +127,17 @@ todoRoutes.route("/getOrder").get(function(req, res) {
     }
   });
 });
+
+todoRoutes.route("/updateOrder").get(function(req, res) {
+  Summary.findByIdAndUpdate({_id: req.query.id}, {isCompleted: true}, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json({
+      msg: "Updated"
+    });
+  })
+});
+
 
 module.exports = todoRoutes;
