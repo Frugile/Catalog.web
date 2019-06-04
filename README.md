@@ -3,6 +3,8 @@
 Web application that allows you to browse the store's offer of upholstery materials and place an order - using MERN Stack (MongoDB, Express, React, Node.js)
 
 
+![](catalogwebgif.gif)
+
 ## Getting Started
 
 
