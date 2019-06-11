@@ -5,6 +5,8 @@ Web application that allows you to browse the store's offer of upholstery materi
 
 ![](catalogwebgif.gif)
 
+[Go to WIKI - up-to-date documentation](https://github.com/Frugile/Catalog.web/wiki)
+
 ## Getting Started
 
 
